@@ -42,25 +42,28 @@ Create a new `run.js` file and include the following:
 
 ```js
 // Import the creator_studio module.
-const cs  = require ('.r/creator_studio.js');
+const cs  = require ('./creator_studio.js');
 
 // Set your facebook username and password
 cs.creator_studio.user('me@gmail.com');
-cs.creator_studio.pass('myhardpass');
+cs.creator_studio.pass('facebook_password');
 
-// Update the IG_Post object to customise the post.
-cs.creator_studio.IG_post.caption       = 'This is the new Caption!';
-cs.creator_studio.IG_post.video         = '/Users/me/Downloads/output.mov';
-cs.creator_studio.IG_post.cover         = '/Users/me/Downloads/photo.jpg';
+// Set the cookie file locations
+cs.creator_studio.cookiefile('./cookies.json');
 
 // Update the puppeteer launch settings.
 // Use to update the executablePath of the Chromium location you downloaded
 // with the media codecs included.
-cs.creator_studio.puppeteer_settings    = { 
+cs.creator_studio.settings({ 
     headless: true, 
     devtools: false,
-    executablePath: "/Users/me/Chromium.app/Contents/MacOS/Chromium"
-};
+    executablePath: "./Chromium.app/Contents/MacOS/Chromium"
+});
+
+// Update the IG_Post object to customise the post.
+cs.creator_studio.IG_post.caption       = 'This is the new Caption!';
+cs.creator_studio.IG_post.video         = './output.mov';
+cs.creator_studio.IG_post.cover         = './photo.jpg';
 
 // Run, you fools!
 cs.creator_studio.run();

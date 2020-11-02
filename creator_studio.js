@@ -29,13 +29,7 @@ var creator_studio = (function () {
 
 
 
-    // ┌──────────────────────────────────────────────────────────┐
-    // │                                                          │
-    // │                 Set Cookie Storage File                  │
-    // │                                                          │
-    // └──────────────────────────────────────────────────────────┘
-    const cookiefile ='./cookies.json';
-    const cookie = require(cookiefile);
+    
 
 
 
@@ -48,6 +42,8 @@ var creator_studio = (function () {
     let browser;
 
     let page;
+
+    let cookie;
 
     let new_cookies;
 
@@ -71,10 +67,9 @@ var creator_studio = (function () {
     // │                                                          │
     // └──────────────────────────────────────────────────────────┘
 
-    const puppeteer_settings = { 
+    let puppeteer_settings = { 
         headless: true, 
-        devtools: false,
-        executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium"
+        devtools: false
     }
 
 
@@ -85,7 +80,7 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
 
 
-    const IG_post = {
+    let IG_post = {
         caption:  "Test Puppeteer",
         location: "London",
         date:     privateFormattedDate(),
@@ -174,9 +169,32 @@ var creator_studio = (function () {
 
 
 
+    
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                                                          │
+    // │                 Set Cookie Storage File                  │
+    // │                                                          │
+    // └──────────────────────────────────────────────────────────┘
+    function publicSetCookieFile(cookieFile){
+        cookie = require(cookieFile);
+    }
 
+
+
+
+
+    // ┌─────────────────────────────────────────────────────────┐
+    // │                                                         │
+    // │                Update Puppeteer Settings                │
+    // │                                                         │
+    // └─────────────────────────────────────────────────────────┘
+    function publicSetPuppeteerSettings(settings){
+        puppeteer_settings = settings;
+    }
 
     
+
+
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
     // │                       Run Function                       │
@@ -651,10 +669,11 @@ var creator_studio = (function () {
     return {
         puppeteer_settings,     
         IG_post,
-        cookiefile,
         run: publicRun,
         user: publicSetUsername,
         pass: publicSetPassword,
+        cookiefile: publicSetCookieFile,
+        settings: publicSetPuppeteerSettings,
     };
 
 })();
