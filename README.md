@@ -69,4 +69,24 @@ cs.creator_studio.IG_post.cover         = './photo.jpg';
 cs.creator_studio.run();
 ```
 
+## Defaults
+You should see a new post in the creator studio which is scheduled to run at
+07:00 the next day. 
 
+You can set any details to the `IG_post` object to replace the defaults. That
+currently includes:
+
+    IG_post.caption:  "Test Puppeteer",
+    IG_post.location: "London",
+    IG_post.date:     privateFormattedDate(),
+    IG_post.time:     "07:00",
+    IG_post.video:    "./output.mp4",
+    IG_post.cover:    "./photo.jpg",
+
+## TODO
+
+- Check the cross-post checkbox to post to the facebook page.
+- Tagging images / video
+- Advanced section - turn off comments
+- Publish immediately
+- IGTV
