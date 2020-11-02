@@ -3,7 +3,7 @@
 ## IMPORTANT
 
 IMPORTANT - This puppeteer script will not run without a version of chromium that
-has been compiled with the video/audio codecs. Chrome comes with them as standard
+has NOT been compiled with the video/audio codecs. Chrome comes with them as standard
 but Chromium does not.
 
 You can download a copy of Chromium with those codecs here:
