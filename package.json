@@ -1,6 +1,9 @@
 {
     "name": "ig-scheduler",
     "version": "1.0.0",
+    "author": "Andy Pearson (https://ioroot.com)",
+    "description": "Allows you to schedule Instagram & Fcebook posts through the CLI",
+    "license": "MIT",
     "main": "run.js",
     "dependencies": {
         "@nesk/puphpeteer": "^1.6.0",
