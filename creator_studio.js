@@ -565,8 +565,8 @@ var creator_studio = (function () {
              */
             if ('' !== IG_post.crosspost ){
                 try {
-                    await page.waitForSelector(selector.crosspost_checkbox);
                     console.log('Click Facebook Page checkbox');
+                    await page.waitForTimeout(500);
                     await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2" });
                 } catch (err) {
                     console.log('Error clicking the facebook crosspost checkbox : ' + err);
@@ -575,9 +575,9 @@ var creator_studio = (function () {
 
 
             /**
-             * Schedule the facebook crosspost
+             * Schedule the facebook crossposts
              */
-            if ('' !== IG_post.crosspost || '' !== IG_post.date || '' !== IG_post.time){
+            if ('' !== IG_post.crosspost && '' !== IG_post.date && '' !== IG_post.time){
                 
 
                 /**
@@ -597,16 +597,11 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Click crosspost schedule checkbox');
-                    // await page.waitForTimeout(500);
-                    // const [crosspost_schedule] = await page.$x(selector.crosspost_schedule);
-                    // await crosspost_schedule.click();
-
-                    await page.waitForTimeout(500);
+                    await page.waitForTimeout(1000);
                     await page.click(selector.crosspost_schedule, { waitUntil: "networkidle2" });
                 } catch (err) {
                     console.log('Error clicking crosspost schedule checkbox : ' + err);
                 }
-                await page.waitForTimeout(1000);
 
 
                 /**
@@ -644,7 +639,7 @@ var creator_studio = (function () {
             /**
              * Publish immediately if no date or time supplied.
              */
-            if ('' !== IG_post.date || '' !== IG_post.time ){
+            if ('' !== IG_post.date && '' !== IG_post.time ){
 
                 /**
                  * Click down arrow next to 'publish'
@@ -703,15 +698,6 @@ var creator_studio = (function () {
                 }
 
             }
-
-
-
-
-
-
-
-
-
 
 
             /**
