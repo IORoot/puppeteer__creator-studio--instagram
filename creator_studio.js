@@ -720,7 +720,7 @@ var creator_studio = (function () {
             try {
                 console.log('Click Publish');
                 await page.waitForTimeout(1000);
-                //await page.click(selector.publish_button, { waitUntil: "networkidle2" });
+                await page.click(selector.publish_button, { waitUntil: "networkidle2" });
             } catch (err) {
                 console.log('Error clicking the publish button : ' + err);
             }
