@@ -73,27 +73,27 @@ cs.creator_studio.run();
 
 You can run the command through the command line (without installing), like this:
 
-```
+```bash
 node . -u me@gmail.com -p PASSWORD -f /Users/me/cookies.json -v ./output.mov -c "Crosspost" -d 05/11/2020 -t 02:00 -x yes
 ```
 
 Run the help file with:
 
-```
+```bash
 node . --help
 ```
 
 Install the commandline tool with: (while in the directory)
-```
+```bash
 npm install -g .
 ```
 
 Uninstall with:
-```
+```bash
 npm uninstall -g ig-scheduler
 ```
 
 Run an installed veersion with `cs`
-```
+```bash
 cs -u me@gmail.com -p PASSWORD -f /Users/me/cookies.json -v ./output.mov -c "Crosspost" -d 05/11/2020 -t 02:00 -x yes
 ```
