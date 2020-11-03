@@ -86,7 +86,7 @@ var creator_studio = (function () {
         time:      "",
         video:     "./output.mp4",
         cover:     "",
-        crosspost: false,
+        crosspost: "",
     };
 
 
@@ -123,7 +123,10 @@ var creator_studio = (function () {
         xpath_custom_upload:    '//*[@id="creator_studio_sliding_tray_root"]/div/div/div[2]/div[1]/div/div/div/div[2]',
         input_add_image:        'input[type="file"]',
         publish_chooser:        '//div[@id="creator_studio_sliding_tray_root"]/div/div/div[3]/div[2]/div/button',
-        schedule_checkbox:      '/html/body/div[10]/div/div/div/div/div[2]',
+        schedule_checkbox:      'body > div:nth-last-child(1) div[aria-checked="false"]',
+        crosspost_checkbox:     '#creator_studio_sliding_tray_root button[role="checkbox"]',
+        crosspost_chooser:      '#creator_studio_sliding_tray_root button[aria-haspopup="true"]',
+        crosspost_schedule:     '.uiContextualLayerAboveRight div div div div:nth-of-type(3)',
         publish_button:         '#creator_studio_sliding_tray_root div div div:nth-of-type(3) button[aria-disabled]',
     };
 
@@ -556,6 +559,88 @@ var creator_studio = (function () {
 
 
 
+
+            /**
+             * Cross-post to facebook page
+             */
+            if ('' !== IG_post.crosspost ){
+                try {
+                    await page.waitForSelector(selector.crosspost_checkbox);
+                    console.log('Click Facebook Page checkbox');
+                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2" });
+                } catch (err) {
+                    console.log('Error clicking the facebook crosspost checkbox : ' + err);
+                }
+            }
+
+
+            /**
+             * Schedule the facebook crosspost
+             */
+            if ('' !== IG_post.crosspost || '' !== IG_post.date || '' !== IG_post.time){
+                
+
+                /**
+                 * Click down arrow next to crosspost 'publish'
+                 */
+                try {
+                    console.log('Click crosspost down-arrow');
+                    await page.waitForTimeout(500);
+                    await page.click(selector.crosspost_chooser, { waitUntil: "networkidle2" });
+                } catch (err) {
+                    console.log('Error clicking crosspost options down-arrow : ' + err);
+                }
+
+
+                /**
+                 * Click down arrow next to crosspost 'publish'
+                 */
+                try {
+                    console.log('Click crosspost schedule checkbox');
+                    // await page.waitForTimeout(500);
+                    // const [crosspost_schedule] = await page.$x(selector.crosspost_schedule);
+                    // await crosspost_schedule.click();
+
+                    await page.waitForTimeout(500);
+                    await page.click(selector.crosspost_schedule, { waitUntil: "networkidle2" });
+                } catch (err) {
+                    console.log('Error clicking crosspost schedule checkbox : ' + err);
+                }
+                await page.waitForTimeout(1000);
+
+
+                /**
+                 * Add date
+                 */
+                try {
+                    console.log('Add crosspost date');
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.type( IG_post.date,  { waitUntil: "networkidle2" } );
+                } catch (err) {
+                    console.log('Error typing in the crosspost date : ' + err);
+                }
+
+
+                /**
+                 * Add Time
+                 */
+                try {
+                    console.log('Add time');
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.type( IG_post.time, { waitUntil: "networkidle2" } );
+                } catch (err) {
+                    console.log('Error typing in the crosspost time : ' + err);
+                }
+
+
+            }
+
+
+
+
+
             /**
              * Publish immediately if no date or time supplied.
              */
@@ -580,12 +665,12 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Click schedule checkbox');
-                    const [schedule_checkbox] = await page.$x(selector.schedule_checkbox);
-                    await schedule_checkbox.click();
+                    await page.waitForTimeout(500);
+                    await page.click(selector.schedule_checkbox, { waitUntil: "networkidle2" });
+
                 } catch (err) {
                     console.log('Error clicking the schedule checkbox : ' + err);
                 }
-
 
 
 
@@ -621,13 +706,21 @@ var creator_studio = (function () {
 
 
 
+
+
+
+
+
+
+
+
             /**
              * PUBLISH 
              */
             try {
                 console.log('Click Publish');
                 await page.waitForTimeout(1000);
-                await page.click(selector.publish_button, { waitUntil: "networkidle2" });
+                //await page.click(selector.publish_button, { waitUntil: "networkidle2" });
             } catch (err) {
                 console.log('Error clicking the publish button : ' + err);
             }
