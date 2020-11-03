@@ -69,6 +69,31 @@ cs.creator_studio.IG_post.cover         = './photo.jpg';
 cs.creator_studio.run();
 ```
 
+## Usage CLI
+
+You can run the command through the command line, like this:
+
+```
+node . -u me@gmail.com -p PASSWORD -f /Users/me/cookies.json -v ./output.mov -c "Crosspost" -d 05/11/2020 -t 02:00 -x yes
+```
+
+Run the help file with:
+
+```
+node . --help
+```
+
+Install the commandline tool with: (while in the directory)
+```
+npm install -g .
+```
+
+Uninstall with:
+```
+npm uninstall -g cs
+```
+
+
 ## Defaults
 You should see a new post in the creator studio which is scheduled to run at
 07:00 the next day. 
@@ -83,10 +108,4 @@ currently includes:
     IG_post.video:    "./output.mp4",
     IG_post.cover:    "./photo.jpg",
 
-## TODO
 
-- Check the cross-post checkbox to post to the facebook page.
-- Tagging images / video
-- Advanced section - turn off comments
-- Publish immediately
-- IGTV
