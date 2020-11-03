@@ -71,7 +71,7 @@ cs.creator_studio.run();
 
 ## Usage CLI
 
-You can run the command through the command line, like this:
+You can run the command through the command line (without installing), like this:
 
 ```
 node . -u me@gmail.com -p PASSWORD -f /Users/me/cookies.json -v ./output.mov -c "Crosspost" -d 05/11/2020 -t 02:00 -x yes
@@ -90,22 +90,10 @@ npm install -g .
 
 Uninstall with:
 ```
-npm uninstall -g cs
+npm uninstall -g ig-scheduler
 ```
 
-
-## Defaults
-You should see a new post in the creator studio which is scheduled to run at
-07:00 the next day. 
-
-You can set any details to the `IG_post` object to replace the defaults. That
-currently includes:
-
-    IG_post.caption:  "Test Puppeteer",
-    IG_post.location: "London",
-    IG_post.date:     privateFormattedDate(),
-    IG_post.time:     "07:00",
-    IG_post.video:    "./output.mp4",
-    IG_post.cover:    "./photo.jpg",
-
-
+Run an installed veersion with `cs`
+```
+cs -u me@gmail.com -p PASSWORD -f /Users/me/cookies.json -v ./output.mov -c "Crosspost" -d 05/11/2020 -t 02:00 -x yes
+```
