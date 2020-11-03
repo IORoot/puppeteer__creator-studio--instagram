@@ -63,7 +63,7 @@ class creator_studio {
     private $IG_post = [
         'caption'  => 'Testing Puppeteer',
         'location' => 'London',
-        'file'     => '/Users/andrewpearson/video.mp4',
+        'file'     => '/Users/andrewpearson/Downloads/output.mp4',
         // 'file'     => '/Users/andrewpearson/image.jpg',
     ];
 
@@ -167,9 +167,7 @@ class creator_studio {
         $this->enter_caption();
         $this->enter_location();
         $this->click_add_content_link();
-        $this->wait(1000);
-        // $this->click_file_upload_link();
-        // $this->wait(4000);
+        $this->wait(4000);
         $this->select_file_upload();
 
 
@@ -415,20 +413,6 @@ class creator_studio {
 
 
 
-    /**
-     * Click on the "from file upload" link
-     */
-    private function click_file_upload_link()
-    {
-
-        if ($this->debug){ echo '<p>Clicking the "from File Upload" link</p>'; }
-
-
-        $this->page->tryCatch->click('[rel="ignore"]', [ 'waitUntil' => 'networkidle2' ]);
-
-
-    }
-
 
 
 
@@ -443,10 +427,8 @@ class creator_studio {
         if ($this->debug){ echo '<p>Uploading file from filesystem</p>'; }
         
 
-        $this->page->tryCatch->querySelector('input[type="file"]')->uploadFile($this->IG_post['file']); // Images work.
+        $this->page->tryCatch->querySelector('.uiContextualLayerPositioner input[type="file"]')->uploadFile($this->IG_post['file']);
 
-
-        $fileChooser = $this->page->tryCatch->Promise->all();
     }
 
 
