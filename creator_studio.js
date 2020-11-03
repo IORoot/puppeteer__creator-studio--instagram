@@ -29,7 +29,6 @@ var creator_studio = (function () {
 
 
 
-    
 
 
 
@@ -81,12 +80,13 @@ var creator_studio = (function () {
 
 
     let IG_post = {
-        caption:  "Test Puppeteer",
-        location: "London",
-        date:     privateFormattedDate(),
-        time:     "07:00",
-        video:    "./output.mp4",
-        cover:    "./photo.jpg",
+        caption:   "Test Puppeteer",
+        location:  "London",
+        date:      "",
+        time:      "",
+        video:     "./output.mp4",
+        cover:     "",
+        crosspost: false,
     };
 
 
@@ -126,19 +126,6 @@ var creator_studio = (function () {
         schedule_checkbox:      '/html/body/div[10]/div/div/div/div/div[2]',
         publish_button:         '#creator_studio_sliding_tray_root div div div:nth-of-type(3) button[aria-disabled]',
     };
-
-
-
-
-    // ┌─────────────────────────────────────────────────────────┐
-    // │                                                         │
-    // │        Get the current date in DD/MM/YYYY format        │
-    // │                                                         │
-    // └─────────────────────────────────────────────────────────┘
-    function privateFormattedDate(d = new Date) {
-        return [d.getDate()+1, d.getMonth()+1, d.getFullYear()]
-            .map(n => n < 10 ? `0${n}` : `${n}`).join('/');
-    }
 
 
 
@@ -515,109 +502,122 @@ var creator_studio = (function () {
 
 
 
-
-
             /**
-             * Change Cover Image
+             * Skip if Cover image is empty.
              */
-            try {
-                console.log('Selecting Cover Image');
-                await page.waitForXPath(selector.xpath_cover_image);
-                const [cover_image] = await page.$x(selector.xpath_cover_image);
-                await cover_image.click();
-            } catch (err) {
-                console.log('Error selecting the "cover image" sidebar : ' + err);
-            }
+            if ('' !== IG_post.cover){
+
+
+                /**
+                 * Change Cover Image
+                 */
+                try {
+                    console.log('Selecting Cover Image');
+                    await page.waitForXPath(selector.xpath_cover_image);
+                    const [cover_image] = await page.$x(selector.xpath_cover_image);
+                    await cover_image.click();
+                } catch (err) {
+                    console.log('Error selecting the "cover image" sidebar : ' + err);
+                }
 
 
 
 
-            /**
-             * Custom upload box
-             */
-            try {
-                console.log('Click custom upload box');
-                await page.waitForXPath(selector.xpath_custom_upload);
-                const [custom_upload] = await page.$x(selector.xpath_custom_upload);
-                await custom_upload.click();
-            } catch (err) {
-                console.log('Error clicking the "custom upload" box : ' + err);
-            }
-
-
-
-
-            /**
-             * Click "Add Image" within custom upload.
-             */
-            try {
-                console.log('Click "add image"');
-                await page.waitForSelector(selector.input_add_image);
-                const fileInput = await page.$(selector.input_add_image);
-                await fileInput.uploadFile(IG_post.cover);
-            } catch (err) {
-                console.log('Error clicking the "Add Image" button : ' + err);
-            }
-
-
-
-
-            /**
-             * Click down arrow next to 'publish'
-             */
-            try {
-                console.log('Click down-arrow');
-                const [down_arrow] = await page.$x(selector.publish_chooser);
-                await down_arrow.click();
-            } catch (err) {
-                console.log('Error clicking publish options down-arrow : ' + err);
-            }
-
-
-
-
-            /**
-             * Click schedule checkbox
-             */
-            try {
-                console.log('Click schedule checkbox');
-                const [schedule_checkbox] = await page.$x(selector.schedule_checkbox);
-                await schedule_checkbox.click();
-            } catch (err) {
-                console.log('Error clicking the schedule checkbox : ' + err);
-            }
-
-
-
-
-            /**
-             * Add date
-             */
-            try {
-                console.log('Add date');
-                await page.keyboard.press('Tab', {delay: 100});
-                await page.keyboard.press('Tab', {delay: 100});
-                await page.keyboard.press('Tab', {delay: 100});
-                await page.keyboard.type( IG_post.date,  { waitUntil: "networkidle2" } );
-            } catch (err) {
-                console.log('Error typing in the date : ' + err);
-            }
-
+                /**
+                 * Custom upload box
+                 */
             
+                try {
+                    console.log('Click custom upload box');
+                    await page.waitForXPath(selector.xpath_custom_upload);
+                    const [custom_upload] = await page.$x(selector.xpath_custom_upload);
+                    await custom_upload.click();
+                } catch (err) {
+                    console.log('Error clicking the "custom upload" box : ' + err);
+                }
+
+
+
+
+                /**
+                 * Click "Add Image" within custom upload.
+                 */
+            
+                try {
+                    console.log('Click "add image"');
+                    await page.waitForSelector(selector.input_add_image);
+                    const fileInput = await page.$(selector.input_add_image);
+                    await fileInput.uploadFile(IG_post.cover);
+                } catch (err) {
+                    console.log('Error clicking the "Add Image" button : ' + err);
+                }
+            }
+
 
 
 
             /**
-             * Add Time
+             * Publish immediately if no date or time supplied.
              */
-            try {
-                console.log('Add time');
-                await page.keyboard.press('Tab', {delay: 100});
-                await page.keyboard.type( IG_post.time, { waitUntil: "networkidle2" } );
-            } catch (err) {
-                console.log('Error typing in the time : ' + err);
-            }
+            if ('' !== IG_post.date || '' !== IG_post.time ){
 
+                /**
+                 * Click down arrow next to 'publish'
+                 */
+                try {
+                    console.log('Click down-arrow');
+                    const [down_arrow] = await page.$x(selector.publish_chooser);
+                    await down_arrow.click();
+                } catch (err) {
+                    console.log('Error clicking publish options down-arrow : ' + err);
+                }
+
+
+
+
+                /**
+                 * Click schedule checkbox
+                 */
+                try {
+                    console.log('Click schedule checkbox');
+                    const [schedule_checkbox] = await page.$x(selector.schedule_checkbox);
+                    await schedule_checkbox.click();
+                } catch (err) {
+                    console.log('Error clicking the schedule checkbox : ' + err);
+                }
+
+
+
+
+                /**
+                 * Add date
+                 */
+                try {
+                    console.log('Add date');
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.type( IG_post.date,  { waitUntil: "networkidle2" } );
+                } catch (err) {
+                    console.log('Error typing in the date : ' + err);
+                }
+
+
+
+
+
+                /**
+                 * Add Time
+                 */
+                try {
+                    console.log('Add time');
+                    await page.keyboard.press('Tab', {delay: 100});
+                    await page.keyboard.type( IG_post.time, { waitUntil: "networkidle2" } );
+                } catch (err) {
+                    console.log('Error typing in the time : ' + err);
+                }
+
+            }
 
 
 
