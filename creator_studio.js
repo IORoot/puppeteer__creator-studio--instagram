@@ -38,7 +38,7 @@ var creator_studio = (function () {
     // │                     Global Variables                     │
     // │                                                          │
     // └──────────────────────────────────────────────────────────┘
-
+    
     let browser;
 
     let page;
@@ -500,15 +500,15 @@ var creator_studio = (function () {
 
 
             /**
-             *  Upload Video through filebrowser
+             *  Upload Video WITHOUT filebrowser
              */
             try {
                 console.log('Selecting File');
-                const [fileChooser] = await Promise.all([
-                    page.waitForFileChooser(),
-                    await page.click(selector.filebrowser_open,  { waitUntil: "networkidle2" }),
-                ]);
-                await fileChooser.accept([IG_post.video]);
+                await page.waitForSelector('.uiContextualLayerPositioner input[type="file"]');
+                const inputUploadHandle = await page.$('.uiContextualLayerPositioner input[type="file"]'); 
+                inputUploadHandle.uploadFile(IG_post.video);
+
+
             } catch (err) {
                 console.log('Error using the filebrowser and accepting input file : ' + err);
             }
