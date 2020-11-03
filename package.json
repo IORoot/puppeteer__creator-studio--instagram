@@ -6,11 +6,11 @@
     "license": "MIT",
     "main": "run.js",
     "dependencies": {
-        "@nesk/puphpeteer": "^1.6.0",
         "puppeteer-core": "^5.4.1",
-        "yargs": "^13.2.4"
+        "yargs": "^13.3.2"
     },
     "bin": {
         "cs": "run.js"
-    }
+    },
+    "repository": "IORoot/puppeteer__creator-studio--instagram" 
 }
