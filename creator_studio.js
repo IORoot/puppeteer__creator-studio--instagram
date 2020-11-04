@@ -42,7 +42,9 @@ var creator_studio = (function () {
 
     let page;
 
-    let cookie;
+    let cookieFilename;
+
+    let cookiefile;
 
     let new_cookies;
 
@@ -68,7 +70,8 @@ var creator_studio = (function () {
 
     let puppeteer_settings = { 
         headless: true, 
-        devtools: false
+        devtools: false,
+        args: ['--no-sandbox']
     }
 
 
@@ -166,7 +169,8 @@ var creator_studio = (function () {
     // │                                                          │
     // └──────────────────────────────────────────────────────────┘
     function publicSetCookieFile(cookieFile){
-        cookie = require(cookieFile);
+        cookieFilename = cookieFile;
+        cookiefile = require(cookieFilename);
     }
 
 
@@ -241,7 +245,7 @@ var creator_studio = (function () {
             /**
              * Cookie File exists
              */
-            if (Object.keys(cookie).length) {
+            if (Object.keys(cookiefile).length) {
 
 
                 /**
@@ -249,7 +253,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('load cookies');
-                    await page.setCookie(...cookie); // ... spread all cookies.
+                    await page.setCookie(...cookiefile); // ... spread all cookies.
                 } catch (err) {
                     console.log('Error loading cookies : ' + err);
                 } 
@@ -263,7 +267,7 @@ var creator_studio = (function () {
             /**
              * No cookies, Login instead
              */
-            if (!Object.keys(cookie).length) {
+            if (!Object.keys(cookiefile).length) {
             
 
                 console.log('login page');
@@ -388,7 +392,7 @@ var creator_studio = (function () {
              * complete. This canbe a simple error catcher console.log
              */
             try {
-                await fs.writeFile(cookiefile, JSON.stringify(new_cookies, null, 2), (err, data) => {
+                await fs.writeFile(cookieFilename, JSON.stringify(new_cookies, null, 2), (err, data) => {
                     if (err) throw err;
                         console.log(data);
                     }
@@ -717,7 +721,8 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Done');
-                await page.waitForTimeout(10000);
+                await page.waitForTimeout(20000);
+                await page.screenshot({path: 'screenshot-done.png'})
                 await browser.close();
             } catch (err) {
                 console.log('Error closing the browser : ' + err);
@@ -751,7 +756,7 @@ var creator_studio = (function () {
         run: publicRun,
         user: publicSetUsername,
         pass: publicSetPassword,
-        cookiefile: publicSetCookieFile,
+        cookies: publicSetCookieFile,
         settings: publicSetPuppeteerSettings,
     };
 

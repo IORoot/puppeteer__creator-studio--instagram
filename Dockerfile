@@ -3,7 +3,7 @@
 # Initially based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:latest
+FROM node:buster-slim
     
 RUN  apt-get update \
         && apt-get install -y vim wget gnupg ca-certificates \
@@ -24,7 +24,16 @@ RUN  apt-get update \
         && chmod +x /usr/sbin/wait-for-it.sh
 
 # Install Puppeteer under /node_modules so it's available system-wide
-ADD package.json package-lock.json run.js creator_studio.js /usr/src
+ADD package.json package-lock.json run.js creator_studio.js /usr/src/
 
 # Install all node dependencies
-RUN cd /usr/src; npm install 
+# Add user so we don't need --no-sandbox.
+# same layer as npm install to keep re-chowned files from using up several hundred MBs more space
+RUN cd /usr/src \ 
+    && npm install \
+    && npm install -g \
+    && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
+    && mkdir -p /home/pptruser \
+    && echo "[]" > /usr/src/cookie.json \
+    && chown -R pptruser:pptruser /home/pptruser \
+    && chown -R pptruser:pptruser /usr/src
