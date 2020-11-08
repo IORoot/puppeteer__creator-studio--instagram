@@ -17,8 +17,32 @@ const HOST = '0.0.0.0';
 const app = express();
 app.use(body_parser.json());
 
-// Routes
+
+
+/**
+ * Main route - run puppeteer
+ */
 app.post('/', (req, res) => {   
+
+    if (!req.body.user){
+        res.send('Please supply a username');
+        return;
+    }
+
+    if (!req.body.pass){
+        res.send('Please supply a password');
+        return;
+    }
+
+    if (!req.body.video){
+        res.send('Please supply a video file');
+        return;
+    }
+
+    if (!req.body.cookies){
+        res.send('Please supply a cookie file');
+        return;
+    }
 
     cs.creator_studio.settings({ 
         headless: true, 
@@ -28,19 +52,16 @@ app.post('/', (req, res) => {
     });
     
     // Set your facebook username
-    cs.creator_studio.user(req.user);
-    res.write(req.body.user);
+    cs.creator_studio.user(req.body.user);
     
     // Set your facebook password
-    cs.creator_studio.pass(req.pass);
-    res.write(req.body.pass);
+    cs.creator_studio.pass(req.body.pass);
     
     // Set the cookie file locations
-    cs.creator_studio.cookies('/usr/src/app/cookie.json');
+    cs.creator_studio.cookies('/usr/src/app/cookies/' + req.body.cookies);
     
-
     // Required Args
-    cs.creator_studio.IG_post.video = '/usr/src/app/output.mp4';
+    cs.creator_studio.IG_post.video = '/usr/src/app/videos/' + req.body.video;
 
     // Run, you fools!  
     cs.creator_studio.run();
@@ -50,7 +71,19 @@ app.post('/', (req, res) => {
 });
 
 
+/**
+ * Downloader
+ */
 app.post('/vd', (req, res) => {   
+
+    if (!req.body.url){
+        res.send('Please supply a URL');
+        return;
+    }
+    if (!req.body.file){
+        res.send('Please supply a Filename');
+        return;
+    }
 
     // Run, you fools!  
     vd.video_downloader.download(req.body.url, req.body.file);
@@ -59,6 +92,4 @@ app.post('/vd', (req, res) => {
 
 });
 
-app.listen(PORT, HOST);
-
-// console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(PORT, HOST); 

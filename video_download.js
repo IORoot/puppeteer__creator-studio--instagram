@@ -10,38 +10,48 @@ var video_downloader = (function () {
      */
     async function download(url, filePath) {
 
+        if (url == undefined) { return }
+        if (filePath == undefined) { return }
+
         const proto = !url.charAt(4).localeCompare('s') ? https : http;
 
         return new Promise((resolve, reject) => {
-        const file = fs.createWriteStream(filePath);
-        let fileInfo = null;
 
-        const request = proto.get(url, response => {
-            if (response.statusCode !== 200) {
-            reject(new Error(`Failed to get '${url}' (${response.statusCode})`));
-            return;
-            }
+            const file = fs.createWriteStream(filePath);
+            let fileInfo = null;
 
-            fileInfo = {
-            mime: response.headers['content-type'],
-            size: parseInt(response.headers['content-length'], 10),
-            };
+            const request = proto.get(url, response => {
+                
+                if (response.statusCode !== 200) {
+                    reject(new Error(`Failed to get '${url}' (${response.statusCode})`));
+                    return;
+                }
 
-            response.pipe(file);
-        });
+                fileInfo = {
+                    mime: response.headers['content-type'],
+                    size: parseInt(response.headers['content-length'], 10),
+                };
 
-        // The destination stream is ended by the time it's called
-        file.on('finish', () => resolve(fileInfo));
+                response.pipe(file);
+            });
 
-        request.on('error', err => {
-            fs.unlink(filePath, () => reject(err));
-        });
+            // The destination stream is ended by the time it's  called
+            file.on('finish', () => {
+                fs.chown(filePath,999,999, (err) => {
+                    if (err) { throw err; }
+                })
+                resolve(fileInfo)
+            });
 
-        file.on('error', err => {
-            fs.unlink(filePath, () => reject(err));
-        });
+            request.on('error', err => {
+                fs.unlink(filePath, () => reject(err));
+            });
 
-        request.end();
+            file.on('error', err => {
+                fs.unlink(filePath, () => reject(err));
+            });
+
+            request.end();
         });
     }
 

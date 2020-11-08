@@ -87,7 +87,7 @@ var creator_studio = (function () {
         location:  "London",
         date:      "",
         time:      "",
-        video:     "./output.mp4",
+        video:     "",
         cover:     "",
         crosspost: "",
     };
