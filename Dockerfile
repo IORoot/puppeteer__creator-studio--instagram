@@ -5,6 +5,8 @@
 
 FROM node:buster-slim
     
+
+# Install VIM, WGET, GNUPG, ca-certificates, CHROME, wait-for-it.sh
 RUN  apt-get update \
         && apt-get install -y vim wget gnupg ca-certificates \
         && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -23,17 +25,26 @@ RUN  apt-get update \
         # Make executable
         && chmod +x /usr/sbin/wait-for-it.sh
 
-# Install Puppeteer under /node_modules so it's available system-wide
-ADD package.json package-lock.json run.js creator_studio.js /usr/src/
+
+WORKDIR /usr/src/app
+
+COPY . ./
+
+# # Install Puppeteer under /node_modules so it's available system-wide
+# ADD package.json package-lock.json cli.js server.js creator_studio.js /usr/src/
 
 # Install all node dependencies
 # Add user so we don't need --no-sandbox.
 # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
-RUN cd /usr/src \ 
+RUN cd /usr/src/app \ 
     && npm install \
     && npm install -g \
     && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser \
-    && echo "[]" > /usr/src/cookie.json \
+    && echo "[]" > /usr/src/app/cookie.json \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /usr/src
+
+EXPOSE 8080
+
+CMD [ "node", "server.js" ]

@@ -721,8 +721,8 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Done');
-                await page.waitForTimeout(20000);
                 await page.screenshot({path: 'screenshot-done.png'})
+                await page.waitForTimeout(20000);
                 await browser.close();
             } catch (err) {
                 console.log('Error closing the browser : ' + err);

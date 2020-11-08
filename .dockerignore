@@ -1,1 +1,7 @@
 node_modules/
+Chromium.app
+cookies.json
+.DS_Store
+.git
+.gitignore
+README.md
