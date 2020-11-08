@@ -525,60 +525,6 @@ var creator_studio = (function () {
 
 
 
-            /**
-             * Skip if Cover image is empty.
-             */
-            if ('' !== IG_post.cover){
-
-
-                /**
-                 * Change Cover Image
-                 */
-                try {
-                    console.log('Selecting Cover Image');
-                    await page.waitForXPath(selector.xpath_cover_image);
-                    const [cover_image] = await page.$x(selector.xpath_cover_image);
-                    await cover_image.click();
-                } catch (err) {
-                    console.log('Error selecting the "cover image" sidebar : ' + err);
-                }
-
-
-
-
-                /**
-                 * Custom upload box
-                 */
-            
-                try {
-                    console.log('Click custom upload box');
-                    await page.waitForXPath(selector.xpath_custom_upload);
-                    const [custom_upload] = await page.$x(selector.xpath_custom_upload);
-                    await custom_upload.click();
-                } catch (err) {
-                    console.log('Error clicking the "custom upload" box : ' + err);
-                }
-
-
-
-
-                /**
-                 * Click "Add Image" within custom upload.
-                 */
-            
-                try {
-                    console.log('Click "add image"');
-                    await page.waitForSelector(selector.input_add_image);
-                    const fileInput = await page.$(selector.input_add_image);
-                    await fileInput.uploadFile(IG_post.cover);
-                } catch (err) {
-                    console.log('Error clicking the "Add Image" button : ' + err);
-                }
-            }
-
-
-
-
 
             /**
              * Cross-post to facebook page
@@ -593,6 +539,8 @@ var creator_studio = (function () {
                 }
             }
 
+
+            
 
             /**
              * Schedule the facebook crossposts
@@ -651,6 +599,61 @@ var creator_studio = (function () {
 
 
             }
+
+
+
+
+            /**
+             * Skip if Cover image is empty.
+             */
+            if ('' !== IG_post.cover){
+
+
+                /**
+                 * Change Cover Image
+                 */
+                try {
+                    console.log('Selecting Cover Image');
+                    await page.waitForXPath(selector.xpath_cover_image);
+                    const [cover_image] = await page.$x(selector.xpath_cover_image);
+                    await cover_image.click();
+                } catch (err) {
+                    console.log('Error selecting the "cover image" sidebar : ' + err);
+                }
+
+
+
+
+                /**
+                 * Custom upload box
+                 */
+            
+                try {
+                    console.log('Click custom upload box');
+                    await page.waitForXPath(selector.xpath_custom_upload);
+                    const [custom_upload] = await page.$x(selector.xpath_custom_upload);
+                    await custom_upload.click();
+                } catch (err) {
+                    console.log('Error clicking the "custom upload" box : ' + err);
+                }
+
+
+
+
+                /**
+                 * Click "Add Image" within custom upload.
+                 */
+            
+                try {
+                    console.log('Click "add image"');
+                    await page.waitForSelector(selector.input_add_image);
+                    const fileInput = await page.$(selector.input_add_image);
+                    await fileInput.uploadFile(IG_post.cover);
+                } catch (err) {
+                    console.log('Error clicking the "Add Image" button : ' + err);
+                }
+            }
+
 
 
 

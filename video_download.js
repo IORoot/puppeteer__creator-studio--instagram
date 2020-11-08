@@ -41,7 +41,7 @@ var video_downloader = (function () {
             const request = proto.get(url, response => {
                 
                 if (response.statusCode !== 200) {
-                    reject(new Error(`Failed to get '${url}' (${response.statusCode})`));
+                    console.log('Failed to download URL. Code:'  + response.statusCode);
                     return;
                 }
 

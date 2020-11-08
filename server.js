@@ -32,6 +32,7 @@ app.use(body_parser.json());
  */
 app.post('/', (req, res) => {   
 
+
     /**
      * Check that the APIKEY is set and equal
      * to the configured one in auth.json file.
@@ -41,44 +42,86 @@ app.post('/', (req, res) => {
         return;
     }
 
-    if (!req.body.user){
+
+    // Set your facebook username
+    if (req.body.user){     
+        cs.creator_studio.user(req.body.user);
+    } else {
         res.send('Please supply a username');
         return;
     }
 
-    if (!req.body.pass){
+
+    // Set your facebook password
+    if (req.body.pass){
+        cs.creator_studio.pass(req.body.pass);
+    } else {
         res.send('Please supply a password');
         return;
     }
 
-    if (!req.body.video){
+
+    // Video filename
+    if (req.body.video){
+        cs.creator_studio.IG_post.video = '/usr/src/app/videos/' + req.body.video;
+    } else {
         res.send('Please supply a video file');
         return;
     }
 
-    if (!req.body.cookies){
+
+    // Set the cookie file locations
+    if (req.body.cookies){
+        cs.creator_studio.cookies('/usr/src/app/cookies/' + req.body.cookies);
+    } else {
         res.send('Please supply a cookie file');
         return;
     }
 
-    cs.creator_studio.settings({ 
-        headless: true, 
-        devtools: false,    
-        executablePath: "/usr/bin/google-chrome-stable",
-        args: ['--no-sandbox']
-    });
+
+    /**
+     * All optional parameters
+     */
+    if (req.body.caption){
+        cs.creator_studio.IG_post.caption = req.body.caption;
+    }
+
+    if (req.body.location){
+        cs.creator_studio.IG_post.location = req.body.location;
+    }
+
+    if (req.body.date){
+        cs.creator_studio.IG_post.date = req.body.date;
+    }
+
+    if (req.body.time){
+        cs.creator_studio.IG_post.time = req.body.time;
+    }
+
+    if (req.body.cover){
+        cs.creator_studio.IG_post.cover = '/usr/src/app/images/' + req.body.cover;
+    }
+
+    if (req.body.crosspost){
+        cs.creator_studio.IG_post.crosspost = req.body.crosspost;
+    }
+
+    /**
+     * Set the puppeteer settings
+     */
+    if (req.body.settings){
+        cs.creator_studio.settings(req.body.settings);
+    } else {
+        cs.creator_studio.settings({ 
+            headless: true, 
+            devtools: false,    
+            executablePath: "/usr/bin/google-chrome-stable",
+            args: ['--no-sandbox']
+        });
+    }    
     
-    // Set your facebook username
-    cs.creator_studio.user(req.body.user);
     
-    // Set your facebook password   
-    cs.creator_studio.pass(req.body.pass);
     
-    // Set the cookie file locations
-    cs.creator_studio.cookies('/usr/src/app/cookies/' + req.body.cookies);
-    
-    // Required Args
-    cs.creator_studio.IG_post.video = '/usr/src/app/videos/' + req.body.video;
 
     // Run, you fools!  
     cs.creator_studio.run();

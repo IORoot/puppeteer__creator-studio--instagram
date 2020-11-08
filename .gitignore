@@ -4,3 +4,4 @@ composer.lock
 cookies.json
 Chromium.app
 auth.json
+manual_run.js

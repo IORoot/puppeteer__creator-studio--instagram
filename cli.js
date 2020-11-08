@@ -38,7 +38,7 @@ const cs  = require ('./creator_studio.js');
 // Use to update the executablePath of the Chromium location you downloaded
 // with the media codecs included.
 cs.creator_studio.settings({ 
-    headless: true, 
+    headless: false, 
     devtools: false,    
     // executablePath: "/usr/bin/google-chrome-stable",
     executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
