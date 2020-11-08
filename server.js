@@ -2,12 +2,12 @@
 
 const express = require('express');
 const body_parser = require('body-parser');
+const fs = require('fs');
 
 // Import the creator_studio module.
-const cs  = require ('./creator_studio.js');
-const vd  = require ('./video_download.js');
-
-
+const cs = require ('./creator_studio.js');
+const vd = require ('./video_download.js');
+const au = require ('./auth.json');
 
 // Constants
 const PORT = 8080;
@@ -15,14 +15,31 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
-app.use(body_parser.json());
 
+
+/**
+ * Open folders
+ */
+app.use('/logs', express.static('logs'))
+app.use('/videos', express.static('videos'))
+app.use('/images', express.static('images'))
+
+app.use(body_parser.json());
 
 
 /**
  * Main route - run puppeteer
  */
 app.post('/', (req, res) => {   
+
+    /**
+     * Check that the APIKEY is set and equal
+     * to the configured one in auth.json file.
+     */
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
 
     if (!req.body.user){
         res.send('Please supply a username');
@@ -54,7 +71,7 @@ app.post('/', (req, res) => {
     // Set your facebook username
     cs.creator_studio.user(req.body.user);
     
-    // Set your facebook password
+    // Set your facebook password   
     cs.creator_studio.pass(req.body.pass);
     
     // Set the cookie file locations
@@ -66,7 +83,7 @@ app.post('/', (req, res) => {
     // Run, you fools!  
     cs.creator_studio.run();
 
-    res.send('Puppeteer Ran. User:' + req.body.user + '. Pass:' + req.body.pass);
+    res.send('Puppeteer Started. Please check log file for status.');
 
 });
 
@@ -75,6 +92,11 @@ app.post('/', (req, res) => {
  * Downloader
  */
 app.post('/vd', (req, res) => {   
+
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
 
     if (!req.body.url){
         res.send('Please supply a URL');
@@ -91,5 +113,9 @@ app.post('/vd', (req, res) => {
     res.send('Video Downloader Ran. URL: ' + req.body.url + '. To File: ' + req.body.file);
 
 });
+
+
+
+
 
 app.listen(PORT, HOST); 

@@ -26,7 +26,7 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
     const puppeteer = require('puppeteer-core');
     const fs = require('fs');
-
+    const util = require('util');
 
 
 
@@ -133,6 +133,22 @@ var creator_studio = (function () {
         publish_button:         '#creator_studio_sliding_tray_root div div div:nth-of-type(3) button[aria-disabled]',
     };
 
+
+
+
+
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                                                          │
+    // │                Custom Debugger / Logger                  │
+    // │                                                          │
+    // └──────────────────────────────────────────────────────────┘
+    var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags : 'w'});
+    var log_stdout = process.stdout;
+
+    console.log = function(d) { //
+        log_file.write(Date() + ' ' + util.format(d) + '\n');
+        log_stdout.write(Date() + ' ' + util.format(d) + '\n');
+    };
 
 
 
