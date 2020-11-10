@@ -44,7 +44,7 @@ COPY . ./
 RUN cd /usr/src/app \ 
         && npm install \
         && npm install -g \
-        && echo "[]" > /usr/src/app/cookie.json \
+        && echo "[]" > /usr/src/app/cookies/cookies.json \
         && chown -R pptruser:pptruser /usr/src
 
 EXPOSE 8080
