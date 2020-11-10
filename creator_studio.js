@@ -26,7 +26,7 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
     const puppeteer = require('puppeteer-core');
     const fs = require('fs');
-
+    const util = require('util');
 
 
 
@@ -42,7 +42,9 @@ var creator_studio = (function () {
 
     let page;
 
-    let cookie;
+    let cookieFilename;
+
+    let cookiefile;
 
     let new_cookies;
 
@@ -68,7 +70,8 @@ var creator_studio = (function () {
 
     let puppeteer_settings = { 
         headless: true, 
-        devtools: false
+        devtools: false,
+        args: ['--no-sandbox']
     }
 
 
@@ -84,7 +87,7 @@ var creator_studio = (function () {
         location:  "London",
         date:      "",
         time:      "",
-        video:     "./output.mp4",
+        video:     "",
         cover:     "",
         crosspost: "",
     };
@@ -136,6 +139,22 @@ var creator_studio = (function () {
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
+    // │                Custom Debugger / Logger                  │
+    // │                                                          │
+    // └──────────────────────────────────────────────────────────┘
+    var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags : 'w'});
+    var log_stdout = process.stdout;
+
+    console.log = function(d) { //
+        log_file.write(Date() + ' ' + util.format(d) + '\n');
+        log_stdout.write(Date() + ' ' + util.format(d) + '\n');
+    };
+
+
+
+
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                                                          │
     // │                Set the Facebook Username                 │
     // │                                                          │
     // └──────────────────────────────────────────────────────────┘
@@ -166,7 +185,8 @@ var creator_studio = (function () {
     // │                                                          │
     // └──────────────────────────────────────────────────────────┘
     function publicSetCookieFile(cookieFile){
-        cookie = require(cookieFile);
+        cookieFilename = cookieFile;
+        cookiefile = require(cookieFilename);
     }
 
 
@@ -241,7 +261,7 @@ var creator_studio = (function () {
             /**
              * Cookie File exists
              */
-            if (Object.keys(cookie).length) {
+            if (Object.keys(cookiefile).length) {
 
 
                 /**
@@ -249,7 +269,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('load cookies');
-                    await page.setCookie(...cookie); // ... spread all cookies.
+                    await page.setCookie(...cookiefile); // ... spread all cookies.
                 } catch (err) {
                     console.log('Error loading cookies : ' + err);
                 } 
@@ -263,7 +283,7 @@ var creator_studio = (function () {
             /**
              * No cookies, Login instead
              */
-            if (!Object.keys(cookie).length) {
+            if (!Object.keys(cookiefile).length) {
             
 
                 console.log('login page');
@@ -388,7 +408,7 @@ var creator_studio = (function () {
              * complete. This canbe a simple error catcher console.log
              */
             try {
-                await fs.writeFile(cookiefile, JSON.stringify(new_cookies, null, 2), (err, data) => {
+                await fs.writeFile(cookieFilename, JSON.stringify(new_cookies, null, 2), (err, data) => {
                     if (err) throw err;
                         console.log(data);
                     }
@@ -505,60 +525,6 @@ var creator_studio = (function () {
 
 
 
-            /**
-             * Skip if Cover image is empty.
-             */
-            if ('' !== IG_post.cover){
-
-
-                /**
-                 * Change Cover Image
-                 */
-                try {
-                    console.log('Selecting Cover Image');
-                    await page.waitForXPath(selector.xpath_cover_image);
-                    const [cover_image] = await page.$x(selector.xpath_cover_image);
-                    await cover_image.click();
-                } catch (err) {
-                    console.log('Error selecting the "cover image" sidebar : ' + err);
-                }
-
-
-
-
-                /**
-                 * Custom upload box
-                 */
-            
-                try {
-                    console.log('Click custom upload box');
-                    await page.waitForXPath(selector.xpath_custom_upload);
-                    const [custom_upload] = await page.$x(selector.xpath_custom_upload);
-                    await custom_upload.click();
-                } catch (err) {
-                    console.log('Error clicking the "custom upload" box : ' + err);
-                }
-
-
-
-
-                /**
-                 * Click "Add Image" within custom upload.
-                 */
-            
-                try {
-                    console.log('Click "add image"');
-                    await page.waitForSelector(selector.input_add_image);
-                    const fileInput = await page.$(selector.input_add_image);
-                    await fileInput.uploadFile(IG_post.cover);
-                } catch (err) {
-                    console.log('Error clicking the "Add Image" button : ' + err);
-                }
-            }
-
-
-
-
 
             /**
              * Cross-post to facebook page
@@ -573,6 +539,8 @@ var creator_studio = (function () {
                 }
             }
 
+
+            
 
             /**
              * Schedule the facebook crossposts
@@ -631,6 +599,61 @@ var creator_studio = (function () {
 
 
             }
+
+
+
+
+            /**
+             * Skip if Cover image is empty.
+             */
+            if ('' !== IG_post.cover){
+
+
+                /**
+                 * Change Cover Image
+                 */
+                try {
+                    console.log('Selecting Cover Image');
+                    await page.waitForXPath(selector.xpath_cover_image);
+                    const [cover_image] = await page.$x(selector.xpath_cover_image);
+                    await cover_image.click();
+                } catch (err) {
+                    console.log('Error selecting the "cover image" sidebar : ' + err);
+                }
+
+
+
+
+                /**
+                 * Custom upload box
+                 */
+            
+                try {
+                    console.log('Click custom upload box');
+                    await page.waitForXPath(selector.xpath_custom_upload);
+                    const [custom_upload] = await page.$x(selector.xpath_custom_upload);
+                    await custom_upload.click();
+                } catch (err) {
+                    console.log('Error clicking the "custom upload" box : ' + err);
+                }
+
+
+
+
+                /**
+                 * Click "Add Image" within custom upload.
+                 */
+            
+                try {
+                    console.log('Click "add image"');
+                    await page.waitForSelector(selector.input_add_image);
+                    const fileInput = await page.$(selector.input_add_image);
+                    await fileInput.uploadFile(IG_post.cover);
+                } catch (err) {
+                    console.log('Error clicking the "Add Image" button : ' + err);
+                }
+            }
+
 
 
 
@@ -717,9 +740,10 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Done');
-                await page.waitForTimeout(10000);
+                await page.screenshot({path: './screenshots/screenshot.png'})
+                await page.waitForTimeout(20000);
                 await browser.close();
-            } catch (err) {
+            } catch (err) { 
                 console.log('Error closing the browser : ' + err);
             }
         
@@ -751,7 +775,7 @@ var creator_studio = (function () {
         run: publicRun,
         user: publicSetUsername,
         pass: publicSetPassword,
-        cookiefile: publicSetCookieFile,
+        cookies: publicSetCookieFile,
         settings: publicSetPuppeteerSettings,
     };
 

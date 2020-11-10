@@ -1,5 +1,0 @@
-{
-    "require": {
-        "nesk/puphpeteer": "^1.6"
-    }
-}
