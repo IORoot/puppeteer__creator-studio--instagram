@@ -47,6 +47,6 @@ RUN cd /usr/src/app \
         && echo "[]" > /usr/src/app/cookie.json \
         && chown -R pptruser:pptruser /usr/src
 
-EXPOSE $PORT
+EXPOSE 8080
 
 CMD [ "node", "server.js" ]
