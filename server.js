@@ -23,6 +23,7 @@ const app = express();
 app.use('/logs', express.static('logs'))
 app.use('/videos', express.static('videos'))
 app.use('/images', express.static('images'))
+app.use('/screenshots', express.static('screenshots'))
 
 app.use(body_parser.json());
 
@@ -119,8 +120,6 @@ app.post('/', (req, res) => {
             args: ['--no-sandbox']
         });
     }    
-    
-    
     
 
     // Run, you fools!  
