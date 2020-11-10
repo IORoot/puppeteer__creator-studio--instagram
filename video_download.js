@@ -56,18 +56,16 @@ var video_downloader = (function () {
             // The destination stream is ended by the time it's  called
             file.on('finish', () => {
                 console.log('Download complete.');
-                // fs.chown(filePath,999,999, (err) => {
-                //     if (err) { throw err; }
-                // })
-                console.log('File Chowned' );
                 resolve(fileInfo)
             });
 
             request.on('error', err => {
+                console.log('Request Error.' + err);
                 fs.unlink(filePath, () => reject(err));
             });
 
             file.on('error', err => {
+                console.log('File Error.' + err);
                 fs.unlink(filePath, () => reject(err));
             });
 
