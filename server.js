@@ -10,7 +10,7 @@ const vd = require ('./video_download.js');
 const au = require ('./auth.json');
 
 // Constants
-const PORT = 8080;
+const PORT = process.env.PORT;
 const HOST = '0.0.0.0';
 
 // App
