@@ -15,6 +15,11 @@ to point to this version of chromium.
 Warning - If you do not do this, then chromium will not upload any videos to the
 creator studio because it will not recognise those file formats.
 
+## Docker on Heroku
+
+The DockerFile now uses the $PORT environment variable because Heroku randomly assigns
+one on the container.
+
 ## Description
 
 This puppeteer script will automatically open up a new page, visit (or login) to 
