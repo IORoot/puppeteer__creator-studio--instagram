@@ -107,6 +107,10 @@ app.post('/', (req, res) => {
         cs.creator_studio.IG_post.crosspost = req.body.crosspost;
     }
 
+    if (req.body.screenshots){
+        cs.creator_studio.screenshots(true);
+    }
+
     /**
      * Set the puppeteer settings
      */

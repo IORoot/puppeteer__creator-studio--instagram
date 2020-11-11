@@ -27,6 +27,8 @@ const options = yargs
 
     .option("x", { alias: "crosspost", describe: "Post to Facebook Page too", type: "string" })
 
+    .option("s", { alias: "screenshots", describe: "Screenshot every step", type: "bool" })
+
     .argv; 
 
 
@@ -81,6 +83,10 @@ if (options.time){
 
 if (options.crosspost){
     cs.creator_studio.IG_post.crosspost     = `${options.crosspost}`;
+}   
+
+if (options.screenshots){
+    cs.creator_studio.IG_post.screenshots(`${options.crosspost}`);
 }   
 
 
