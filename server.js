@@ -64,7 +64,7 @@ app.post('/', (req, res) => {
 
     // Video filename
     if (req.body.video){
-        cs.creator_studio.IG_post.video = '/usr/src/app/videos/' + req.body.video;
+        cs.creator_studio.IG_post.video = __dirname + '/videos/' + req.body.video;
     } else {
         res.send('Please supply a video file');
         return;
@@ -73,7 +73,7 @@ app.post('/', (req, res) => {
 
     // Set the cookie file locations
     if (req.body.cookies){
-        cs.creator_studio.cookies('/usr/src/app/cookies/' + req.body.cookies);
+        cs.creator_studio.cookies(__dirname + '/cookies/' + req.body.cookies);
     } else {
         res.send('Please supply a cookie file');
         return;
@@ -100,7 +100,7 @@ app.post('/', (req, res) => {
     }
 
     if (req.body.cover){
-        cs.creator_studio.IG_post.cover = '/usr/src/app/images/' + req.body.cover;
+        cs.creator_studio.IG_post.cover = __dirname + '/images/' + req.body.cover;
     }
 
     if (req.body.crosspost){
@@ -120,7 +120,8 @@ app.post('/', (req, res) => {
         cs.creator_studio.settings({ 
             headless: true, 
             devtools: false,    
-            executablePath: "/usr/bin/google-chrome-stable",
+            // executablePath: "/usr/bin/google-chrome-stable",
+            executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
             args: ['--no-sandbox']
         });
     }    

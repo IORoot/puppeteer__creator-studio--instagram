@@ -238,6 +238,7 @@ var creator_studio = (function () {
                 browser = await puppeteer.launch(puppeteer_settings);
             } catch (err) {
                 console.log('Error launching puppeteer : ' + err);
+                return;
             } 
 
 
@@ -253,6 +254,7 @@ var creator_studio = (function () {
                 context.overridePermissions(pages.facebook, []);
             } catch (err) {
                 console.log('Error creating browser : ' + err);
+                return;
             } 
 
 
@@ -268,6 +270,7 @@ var creator_studio = (function () {
                 await page.setViewport({ width: 1200, height: 800 });
             } catch (err) {
                 console.log('Error creating page : ' + err);
+                return;
             } 
 
 
@@ -276,7 +279,6 @@ var creator_studio = (function () {
              * Cookie File exists
              */
             if (Object.keys(cookiefile).length) {
-
 
                 /**
                  * Read file.
@@ -301,9 +303,6 @@ var creator_studio = (function () {
             
 
                 console.log('login page');
-
-
-
 
                 /**
                  * Goto Facebook Page
@@ -403,10 +402,11 @@ var creator_studio = (function () {
             try {
                 await page.waitForTimeout(4000);
                 page.goto(pages.IG_creator_studio);
-                if (screenshots == true){ await page.screenshot({path: './screenshots/060_visit creator_studio.png'}) }
+                if (screenshots == true){ await page.screenshot({path: './screenshots/060_visit_creator_studio.png'}) }
             } catch (err) {
                 console.log('Error visiting Creator Studio : ' + err);
-                if (screenshots == true){ await page.screenshot({path: './screenshots/061_visit creator_studio_error.png'}) }
+                if (screenshots == true){ await page.screenshot({path: './screenshots/061_visit_creator_studio_error.png'}) }
+                return;
             } 
             
 
@@ -461,6 +461,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the "new post" button : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/091_click_new_post_button_error.png'}) } 
+                return;
             } 
 
 
@@ -478,6 +479,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the "instagram feed" link : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/101_click_ig_feed_error.png'}) } 
+                return;
             } 
             
 
@@ -494,6 +496,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error waiting for the side tray : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/111_wait_side_tray_error.png'}) } 
+                return;
             }
 
 
@@ -524,6 +527,7 @@ var creator_studio = (function () {
                 page.keyboard.press('Tab');
                 page.keyboard.press('Tab');
                 page.keyboard.type( IG_post.location );
+                page.keyboard.press('Tab');
                 if (screenshots == true){ await page.screenshot({path: './screenshots/130_type_location.png'}) } 
             } catch (err) {
                 console.log('Error filling in the location textbox : ' + err);
@@ -545,6 +549,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking on the "+add content" link : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/141_click_add_content_error.png'}) } 
+                return;
             }
 
 
@@ -563,6 +568,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error using the filebrowser and accepting input file : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/151_upload_video_error.png'}) } 
+                return;
             }
 
 
@@ -799,6 +805,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the publish button : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish_error.png'}) } 
+                return;
             }
 
 
@@ -813,6 +820,7 @@ var creator_studio = (function () {
             } catch (err) { 
                 console.log('Error closing the browser : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/291_done_error.png'}) } 
+                return;
             }
         
         })();
@@ -861,3 +869,31 @@ var creator_studio = (function () {
 // │                                                         │
 // └─────────────────────────────────────────────────────────┘
 module.exports = { creator_studio };
+
+
+
+/**
+ * Add this to the bottom of the creator_studio.js
+ * file and run in vscode to check the puppeteer steps.
+ */
+
+const auth = require ('./auth.json');
+
+creator_studio.user(auth[0].user)
+creator_studio.pass(auth[0].pass);
+creator_studio.cookies("/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/cookies/cookies.json");
+creator_studio.screenshots(true);
+creator_studio.settings({ 
+    headless: false, 
+    devtools: false,
+    executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
+    args: ['--no-sandbox']
+});
+creator_studio.IG_post.video     = "/Users/andrewpearson/Downloads/output.mp4";
+creator_studio.IG_post.cover     = "/Users/andrewpearson/Downloads/photo.jpg";
+creator_studio.IG_post.date      = "11/11/2020";
+creator_studio.IG_post.time      = "12:30";
+creator_studio.IG_post.caption   = "autopost";
+creator_studio.IG_post.location  = "california";
+creator_studio.IG_post.crosspost = "yes";
+creator_studio.run();

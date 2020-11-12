@@ -1,26 +1,25 @@
-Sun Nov 08 2020 15:19:20 GMT+0000 (Greenwich Mean Time) Launch Puppeteer
-Sun Nov 08 2020 15:19:21 GMT+0000 (Greenwich Mean Time) create browser
-Sun Nov 08 2020 15:19:21 GMT+0000 (Greenwich Mean Time) create page
-Sun Nov 08 2020 15:19:22 GMT+0000 (Greenwich Mean Time) load cookies
-Sun Nov 08 2020 15:19:30 GMT+0000 (Greenwich Mean Time) click "new post" button
-Sun Nov 08 2020 15:19:30 GMT+0000 (Greenwich Mean Time) undefined
-Sun Nov 08 2020 15:19:30 GMT+0000 (Greenwich Mean Time) Selecting "Instagram Feed" link
-Sun Nov 08 2020 15:19:30 GMT+0000 (Greenwich Mean Time) Wait for side tray
-Sun Nov 08 2020 15:19:31 GMT+0000 (Greenwich Mean Time) Entering a Caption
-Sun Nov 08 2020 15:19:31 GMT+0000 (Greenwich Mean Time) Entering a Location
-Sun Nov 08 2020 15:19:31 GMT+0000 (Greenwich Mean Time) Clicking on the "+Add Content" link
-Sun Nov 08 2020 15:19:32 GMT+0000 (Greenwich Mean Time) Selecting File
-Sun Nov 08 2020 15:19:43 GMT+0000 (Greenwich Mean Time) Click Facebook Page checkbox
-Sun Nov 08 2020 15:19:57 GMT+0000 (Greenwich Mean Time) Click crosspost down-arrow
-Sun Nov 08 2020 15:19:58 GMT+0000 (Greenwich Mean Time) Click crosspost schedule checkbox
-Sun Nov 08 2020 15:19:59 GMT+0000 (Greenwich Mean Time) Add crosspost date
-Sun Nov 08 2020 15:20:00 GMT+0000 (Greenwich Mean Time) Add time
-Sun Nov 08 2020 15:20:00 GMT+0000 (Greenwich Mean Time) Selecting Cover Image
-Sun Nov 08 2020 15:20:00 GMT+0000 (Greenwich Mean Time) Click custom upload box
-Sun Nov 08 2020 15:20:00 GMT+0000 (Greenwich Mean Time) Click "add image"
-Sun Nov 08 2020 15:20:05 GMT+0000 (Greenwich Mean Time) Click down-arrow
-Sun Nov 08 2020 15:20:05 GMT+0000 (Greenwich Mean Time) Click schedule checkbox
-Sun Nov 08 2020 15:20:06 GMT+0000 (Greenwich Mean Time) Add date
-Sun Nov 08 2020 15:20:06 GMT+0000 (Greenwich Mean Time) Add time
-Sun Nov 08 2020 15:20:06 GMT+0000 (Greenwich Mean Time) Click Publish
-Sun Nov 08 2020 15:20:08 GMT+0000 (Greenwich Mean Time) Done
+Thu Nov 12 2020 07:31:24 GMT+0000 (Greenwich Mean Time) create browser
+Thu Nov 12 2020 07:31:24 GMT+0000 (Greenwich Mean Time) create page
+Thu Nov 12 2020 07:31:24 GMT+0000 (Greenwich Mean Time) login page
+Thu Nov 12 2020 07:31:40 GMT+0000 (Greenwich Mean Time) undefined
+Thu Nov 12 2020 07:31:40 GMT+0000 (Greenwich Mean Time) click "new post" button
+Thu Nov 12 2020 07:31:41 GMT+0000 (Greenwich Mean Time) Selecting "Instagram Feed" link
+Thu Nov 12 2020 07:31:42 GMT+0000 (Greenwich Mean Time) Wait for side tray
+Thu Nov 12 2020 07:31:43 GMT+0000 (Greenwich Mean Time) Entering a Caption
+Thu Nov 12 2020 07:31:43 GMT+0000 (Greenwich Mean Time) Entering a Location
+Thu Nov 12 2020 07:31:51 GMT+0000 (Greenwich Mean Time) Clicking on the "+Add Content" link
+Thu Nov 12 2020 07:31:52 GMT+0000 (Greenwich Mean Time) Selecting File
+Thu Nov 12 2020 07:31:53 GMT+0000 (Greenwich Mean Time) Click Facebook Page checkbox
+Thu Nov 12 2020 07:31:54 GMT+0000 (Greenwich Mean Time) Click crosspost down-arrow
+Thu Nov 12 2020 07:31:55 GMT+0000 (Greenwich Mean Time) Click crosspost schedule checkbox
+Thu Nov 12 2020 07:31:56 GMT+0000 (Greenwich Mean Time) Add crosspost date
+Thu Nov 12 2020 07:31:57 GMT+0000 (Greenwich Mean Time) Add time
+Thu Nov 12 2020 07:31:58 GMT+0000 (Greenwich Mean Time) Selecting Cover Image
+Thu Nov 12 2020 07:31:59 GMT+0000 (Greenwich Mean Time) Click custom upload box
+Thu Nov 12 2020 07:31:59 GMT+0000 (Greenwich Mean Time) Click "add image"
+Thu Nov 12 2020 07:32:00 GMT+0000 (Greenwich Mean Time) Click down-arrow
+Thu Nov 12 2020 07:32:00 GMT+0000 (Greenwich Mean Time) Click schedule checkbox
+Thu Nov 12 2020 07:32:01 GMT+0000 (Greenwich Mean Time) Add date
+Thu Nov 12 2020 07:32:02 GMT+0000 (Greenwich Mean Time) Add time
+Thu Nov 12 2020 07:32:03 GMT+0000 (Greenwich Mean Time) Click Publish
+Thu Nov 12 2020 07:32:04 GMT+0000 (Greenwich Mean Time) Done

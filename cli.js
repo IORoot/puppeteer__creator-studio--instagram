@@ -86,7 +86,7 @@ if (options.crosspost){
 }   
 
 if (options.screenshots){
-    cs.creator_studio.IG_post.screenshots(`${options.crosspost}`);
+    cs.creator_studio.IG_post.screenshots(true);
 }   
 
 
