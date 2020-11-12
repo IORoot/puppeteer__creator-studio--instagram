@@ -8,7 +8,7 @@ FROM node:buster-slim
 RUN apt-get update
 
 # Install VIM, WGET, GNUPG, ca-certificates, CHROME, wait-for-it.sh
-RUN apt-get install -y vim wget gnupg ca-certificates
+RUN apt-get install -y vim wget tinyproxy gnupg ca-certificates
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
 
