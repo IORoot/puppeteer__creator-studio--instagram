@@ -182,7 +182,7 @@ app.post('/clearcookies', (req, res) => {
         let cookieFilename = __dirname + '/cookies/' + req.body.cookies;
 
         // Overwrite with blank.
-        fs.writeFile(cookieFilename, JSON.stringify(), (err, data) => {
+        fs.writeFile(cookieFilename, JSON.stringify([]), (err, data) => {
             if (err) throw err;
                 console.log(data);
             }
