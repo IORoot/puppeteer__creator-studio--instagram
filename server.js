@@ -198,6 +198,25 @@ app.post('/clearcookies', (req, res) => {
 
 
 
+/**
+ * Clear Logfile
+ */
+app.get('/clearlog', (req, res) => {   
+    
+    /**
+     * Check that the APIKEY is set and equal
+     * to the configured one in auth.json file.
+     */
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
+
+    // Overwrite with blank.
+    fs.writeFile(__dirname + '/logs/debug.log', '', (err, data) => {} );
+
+    res.send('Log Cleared');
+});
 
 
 app.listen(PORT, HOST); 
