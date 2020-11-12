@@ -300,14 +300,15 @@ var creator_studio = (function () {
              * No cookies, Login instead
              */
             if (!Object.keys(cookiefile).length) {
+
+                console.log('No cookies found');
+
             
-
-                console.log('login page');
-
                 /**
                  * Goto Facebook Page
                  */
                 try {
+                    console.log('Goto login page');
                     await page.goto(pages.facebook_login, { waitUntil: "networkidle2" });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/010_login_page.png'}) }
                 } catch (err) {
@@ -322,6 +323,7 @@ var creator_studio = (function () {
                  * Click on Cookie Banner
                  */
                 try {
+                    console.log('Clicking of accept cookies popup');
                     await page.click(selector.cookie_banner);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/020_click_cookie_banner.png'}) }
                 } catch (err) {
@@ -337,6 +339,7 @@ var creator_studio = (function () {
                  * This passes in 'user' and sets the value.
                  */
                 try {
+                    console.log('Entering email');
                     await page.evaluate(x => {
                         document.getElementById('email').value = x
                     }, user);
@@ -355,6 +358,7 @@ var creator_studio = (function () {
                  * This passes in 'pass' and sets the value.
                  */
                 try {
+                    console.log('Entering Password');
                     await page.evaluate(x => {
                         document.getElementById('pass').value = x
                     }, pass);
@@ -372,6 +376,7 @@ var creator_studio = (function () {
                  * Wait
                  */
                 try {
+                    console.log('Waiting 1 second.');
                     await page.waitForTimeout(1000);
                 } catch (err) {
                     console.log('Error waiting : ' + err);
@@ -385,6 +390,7 @@ var creator_studio = (function () {
                  * Click the login button
                  */
                 try {
+                    console.log('Clicking login Button');
                     await page.click(selector.login_button, { waitUntil: "networkidle2" });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/050_click_login_button.png'}) }
                 } catch (err) {

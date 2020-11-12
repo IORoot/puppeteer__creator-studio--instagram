@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const serveIndex = require('serve-index')
 const body_parser = require('body-parser');
 const fs = require('fs');
 
@@ -20,10 +21,10 @@ const app = express();
 /**
  * Open folders
  */
-app.use('/logs', express.static('logs'))
-app.use('/videos', express.static('videos'))
-app.use('/images', express.static('images'))
-app.use('/screenshots', express.static('screenshots'))
+app.use('/logs', express.static('logs'));
+app.use('/videos', express.static('videos'), serveIndex('videos', {'icons': true}));
+app.use('/images', express.static('images'), serveIndex('images', {'icons': true}));
+app.use('/screenshots', express.static('screenshots'), serveIndex('screenshots', {'icons': true}));
 
 app.use(body_parser.json());
 
