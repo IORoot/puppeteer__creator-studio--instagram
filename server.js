@@ -162,6 +162,41 @@ app.post('/vd', (req, res) => {
 });
 
 
+/**
+ * Clear cookies
+ */
+app.post('/clearcookies', (req, res) => {   
+    
+    /**
+     * Check that the APIKEY is set and equal
+     * to the configured one in auth.json file.
+     */
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
+
+    // Set the cookie file locations
+    if (req.body.cookies){
+
+        let cookieFilename = __dirname + '/cookies/' + req.body.cookies;
+
+        // Overwrite with blank.
+        fs.writeFile(cookieFilename, JSON.stringify(), (err, data) => {
+            if (err) throw err;
+                console.log(data);
+            }
+        );
+
+    } else {
+        res.send('Please supply a cookie file');
+        return;
+    }
+
+    res.send('Cookies Cleared');
+});
+
+
 
 
 

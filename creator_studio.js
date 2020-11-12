@@ -869,31 +869,3 @@ var creator_studio = (function () {
 // │                                                         │
 // └─────────────────────────────────────────────────────────┘
 module.exports = { creator_studio };
-
-
-
-/**
- * Add this to the bottom of the creator_studio.js
- * file and run in vscode to check the puppeteer steps.
- */
-
-const auth = require ('./auth.json');
-
-creator_studio.user(auth[0].user)
-creator_studio.pass(auth[0].pass);
-creator_studio.cookies("/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/cookies/cookies.json");
-creator_studio.screenshots(true);
-creator_studio.settings({ 
-    headless: false, 
-    devtools: false,
-    executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
-    args: ['--no-sandbox']
-});
-creator_studio.IG_post.video     = "/Users/andrewpearson/Downloads/output.mp4";
-creator_studio.IG_post.cover     = "/Users/andrewpearson/Downloads/photo.jpg";
-creator_studio.IG_post.date      = "11/11/2020";
-creator_studio.IG_post.time      = "12:30";
-creator_studio.IG_post.caption   = "autopost";
-creator_studio.IG_post.location  = "california";
-creator_studio.IG_post.crosspost = "yes";
-creator_studio.run();
