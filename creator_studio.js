@@ -153,6 +153,11 @@ var creator_studio = (function () {
 
 
 
+    function privateErrorStatus(){
+        fs.writeFile(__dirname + '/status', 'error', (err, data) => {} );
+    }
+
+
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -238,6 +243,7 @@ var creator_studio = (function () {
                 browser = await puppeteer.launch(puppeteer_settings);
             } catch (err) {
                 console.log('Error launching puppeteer : ' + err);
+                privateErrorStatus();
                 return;
             } 
 
@@ -254,6 +260,7 @@ var creator_studio = (function () {
                 context.overridePermissions(pages.facebook, []);
             } catch (err) {
                 console.log('Error creating browser : ' + err);
+                privateErrorStatus();
                 return;
             } 
 
@@ -270,6 +277,7 @@ var creator_studio = (function () {
                 await page.setViewport({ width: 1200, height: 800 });
             } catch (err) {
                 console.log('Error creating page : ' + err);
+                privateErrorStatus();
                 return;
             } 
 
@@ -467,6 +475,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the "new post" button : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/091_click_new_post_button_error.png'}) } 
+                privateErrorStatus();
                 return;
             } 
 
@@ -485,6 +494,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the "instagram feed" link : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/101_click_ig_feed_error.png'}) } 
+                privateErrorStatus();
                 return;
             } 
             
@@ -502,6 +512,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error waiting for the side tray : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/111_wait_side_tray_error.png'}) } 
+                privateErrorStatus();
                 return;
             }
 
@@ -556,6 +567,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking on the "+add content" link : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/141_click_add_content_error.png'}) } 
+                privateErrorStatus();
                 return;
             }
 
@@ -575,6 +587,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error using the filebrowser and accepting input file : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/151_upload_video_error.png'}) } 
+                privateErrorStatus();
                 return;
             }
 
@@ -605,6 +618,8 @@ var creator_studio = (function () {
             if ('' !== IG_post.crosspost && '' !== IG_post.date && '' !== IG_post.time){
                 
 
+
+
                 /**
                  * Click down arrow next to crosspost 'publish'
                  */
@@ -617,6 +632,8 @@ var creator_studio = (function () {
                     console.log('Error clicking crosspost options down-arrow : ' + err);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/171_select_crosspost_publish_options_error.png'}) } 
                 }
+
+
 
 
                 /**
@@ -633,6 +650,8 @@ var creator_studio = (function () {
                 }
 
 
+
+
                 /**
                  * Add date
                  */
@@ -647,6 +666,8 @@ var creator_studio = (function () {
                     console.log('Error typing in the crosspost date : ' + err);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/191_crosspost_date_error.png'}) } 
                 }
+
+
 
 
                 /**
@@ -812,6 +833,7 @@ var creator_studio = (function () {
             } catch (err) {
                 console.log('Error clicking the publish button : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish_error.png'}) } 
+                privateErrorStatus();
                 return;
             }
 
@@ -821,12 +843,14 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Done');
+                fs.writeFile(__dirname + '/status', 'success', (err, data) => {} );
                 if (screenshots == true){ await page.screenshot({path: './screenshots/290_done.png'}) } 
                 await page.waitForTimeout(20000);
                 await browser.close();
             } catch (err) { 
                 console.log('Error closing the browser : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/291_done_error.png'}) } 
+                privateErrorStatus();
                 return;
             }
         

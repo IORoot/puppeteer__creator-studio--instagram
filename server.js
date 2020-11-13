@@ -126,6 +126,7 @@ app.post('/', (req, res) => {
         });
     }    
     
+    fs.writeFile(__dirname + '/status', 'running', (err, data) => {} );
 
     // Run, you fools!  
     cs.creator_studio.run();
@@ -153,6 +154,8 @@ app.post('/vd', (req, res) => {
         res.send('Please supply a Filename');
         return;
     }
+
+    fs.writeFile(__dirname + '/status', 'running', (err, data) => {} );
 
     // Run, you fools!  
     vd.video_downloader.download(req.body.url, req.body.file);
@@ -216,6 +219,33 @@ app.get('/clearlog', (req, res) => {
     fs.writeFile(__dirname + '/logs/debug.log', '', (err, data) => {} );
 
     res.send('Log Cleared');
+});
+
+
+/**
+ * Get Status
+ */
+app.get('/status', (req, res) => {   
+    
+    /**
+     * Check that the APIKEY is set and equal
+     * to the configured one in auth.json file.
+     */
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
+
+    fs.readFile(__dirname + '/status', 'utf8', function (err,data) {
+        if (err) {
+            res.send(err);
+            return;
+        }
+
+        res.send(data);
+    });
+
+    
 });
 
 

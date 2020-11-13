@@ -42,6 +42,7 @@ var video_downloader = (function () {
                 
                 if (response.statusCode !== 200) {
                     console.log('Failed to download URL. Code:'  + response.statusCode);
+                    fs.writeFile(__dirname + '/status', 'error', (err, data) => {} );
                     return;
                 }
 
@@ -56,20 +57,19 @@ var video_downloader = (function () {
             // The destination stream is ended by the time it's  called
             file.on('finish', () => {
                 console.log('Download complete.');
-                // fs.chown(filePath,999,999, (err) => {
-                //     if (err) { throw err; }
-                // })
-                // console.log('File Chowned' );
+                fs.writeFile(__dirname + '/status', 'success', (err, data) => {} );
                 resolve(fileInfo)
             });
 
             request.on('error', err => {
                 console.log('Request Error.' + err);
+                fs.writeFile(__dirname + '/status', 'error', (err, data) => {} );
                 fs.unlink(filePath, () => reject(err));
             });
 
             file.on('error', err => {
                 console.log('Request Error.' + err);
+                fs.writeFile(__dirname + '/status', 'error', (err, data) => {} );
                 fs.unlink(filePath, () => reject(err));
             });
 
