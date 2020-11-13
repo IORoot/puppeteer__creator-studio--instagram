@@ -9,7 +9,7 @@ const auth = require ('./auth.json');
 cs.creator_studio.user(auth[0].user)
 cs.creator_studio.pass(auth[0].pass);
 cs.creator_studio.cookies(__dirname + "/cookies/cookies.json");
-cs.creator_studio.screenshots(true);
+// cs.creator_studio.screenshots(false);
 cs.creator_studio.settings({ 
     headless: false, 
     devtools: false,

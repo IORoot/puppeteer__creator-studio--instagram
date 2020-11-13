@@ -324,7 +324,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Clicking of accept cookies popup');
-                    await page.click(selector.cookie_banner);
+                    await page.click(selector.cookie_banner, { waitUntil: "networkidle2" });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/020_click_cookie_banner.png'}) }
                 } catch (err) {
                     console.log('Error Clicking on cookie banner : ' + err);
@@ -407,7 +407,7 @@ var creator_studio = (function () {
              */
             try {
                 await page.waitForTimeout(4000);
-                page.goto(pages.IG_creator_studio);
+                page.goto(pages.IG_creator_studio, { waitUntil: "networkidle2" });
                 if (screenshots == true){ await page.screenshot({path: './screenshots/060_visit_creator_studio.png'}) }
             } catch (err) {
                 console.log('Error visiting Creator Studio : ' + err);
@@ -530,10 +530,11 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Entering a Location');
-                page.keyboard.press('Tab');
-                page.keyboard.press('Tab');
-                page.keyboard.type( IG_post.location );
-                page.keyboard.press('Tab');
+                await page.keyboard.press('Tab');
+                await page.keyboard.press('Tab');
+                await page.keyboard.press('Backspace');
+                await page.keyboard.type( IG_post.location, {delay: 10} );
+                await page.keyboard.press('Tab');
                 if (screenshots == true){ await page.screenshot({path: './screenshots/130_type_location.png'}) } 
             } catch (err) {
                 console.log('Error filling in the location textbox : ' + err);
