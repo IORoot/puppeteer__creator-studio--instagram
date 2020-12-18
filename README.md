@@ -11,10 +11,6 @@ but Chromium does not.
 You can download a copy of Chromium with those codecs here:
 https://chromium.woolyss.com/ to query these routes.
 
-#### `/` 
-
-This is the main route. It will execute the #mac-stable-ungoogled-marmaduke
-
 You can then set the `executablePath` of puppeteer-core in the puppeteer settings
 to point to this version of chromium.
 
@@ -146,6 +142,11 @@ selectors and XPaths are in the `selector` object within the `creator_studio.js`
 
 See the contents of the `manual_run.js` file to see a working version of running the script manually.
 
+
+
+
+
+
 ## `cli.js`
 
 This is the command-line interface to the script. 
@@ -224,9 +225,21 @@ Options:
   -f, --file  Your target filename                           [string] [required]
 ```
 
+
+
+
+
+
+
 ## `video_download.js`
 
 This has one public method, `download()` which takes two parameters, `url` and `filePath`. The `cli_vd.js` script should be used to run this method.
+
+
+
+
+
+
 
 ## `server.js`
 
@@ -361,4 +374,4 @@ Requires the following PARAMETERS:
 
 ## Docker
 
-This script is also dockerised and contains the dockerfile I use to setup my installation on DigitalOcean.
+This script is also dockerised and contains the dockerfile I use to setup my installation on DigitalOcean.z
