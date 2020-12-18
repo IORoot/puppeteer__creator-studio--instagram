@@ -1,10 +1,26 @@
-Fri Nov 13 2020 09:58:39 GMT+0000 (Greenwich Mean Time) Downloading: https://londonparkour.com/wp-content/uploads/2020/10/output.mp4 to: ./videos/output.mp4
-Fri Nov 13 2020 09:58:40 GMT+0000 (Greenwich Mean Time) Download complete.
-Fri Nov 13 2020 09:58:51 GMT+0000 (Greenwich Mean Time) Downloading: https://londonparkour.com/wp-content/uploads/2020/06/Free-1.jpg to: ./images/cover.jpg
-Fri Nov 13 2020 09:58:51 GMT+0000 (Greenwich Mean Time) Download complete.
-Fri Nov 13 2020 09:59:06 GMT+0000 (Greenwich Mean Time) Launch Puppeteer
-Fri Nov 13 2020 09:59:06 GMT+0000 (Greenwich Mean Time) Error launching puppeteer : Error: Failed to launch the browser process! spawn /usr/bin/google-chrome-stable ENOENT
-
-
-TROUBLESHOOTING: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
-
+Fri Dec 18 2020 17:37:17 GMT+0000 (Greenwich Mean Time) Launch Puppeteer
+Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) create browser
+Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) create page
+Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) load cookies
+Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) click "new post" button
+Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) undefined
+Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) Selecting "Instagram Feed" link
+Fri Dec 18 2020 17:37:27 GMT+0000 (Greenwich Mean Time) Wait for side tray
+Fri Dec 18 2020 17:37:28 GMT+0000 (Greenwich Mean Time) Entering a Caption
+Fri Dec 18 2020 17:37:29 GMT+0000 (Greenwich Mean Time) Entering a Location
+Fri Dec 18 2020 17:37:29 GMT+0000 (Greenwich Mean Time) Clicking on the "+Add Content" link
+Fri Dec 18 2020 17:37:30 GMT+0000 (Greenwich Mean Time) Selecting File
+Fri Dec 18 2020 17:37:30 GMT+0000 (Greenwich Mean Time) Click Facebook Page checkbox
+Fri Dec 18 2020 17:37:31 GMT+0000 (Greenwich Mean Time) Click crosspost down-arrow
+Fri Dec 18 2020 17:37:32 GMT+0000 (Greenwich Mean Time) Click crosspost schedule checkbox
+Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Add crosspost date
+Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Add time
+Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Selecting Cover Image
+Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click custom upload box
+Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click "add image"
+Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click down-arrow
+Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click schedule checkbox
+Fri Dec 18 2020 17:37:35 GMT+0000 (Greenwich Mean Time) Add date
+Fri Dec 18 2020 17:37:35 GMT+0000 (Greenwich Mean Time) Add time
+Fri Dec 18 2020 17:37:36 GMT+0000 (Greenwich Mean Time) NOOP
+Fri Dec 18 2020 17:37:36 GMT+0000 (Greenwich Mean Time) Done

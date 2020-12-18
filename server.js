@@ -112,6 +112,10 @@ app.post('/', (req, res) => {
         cs.creator_studio.screenshots(true);
     }
 
+    if (req.body.noop){
+        cs.creator_studio.IG_post.noop = req.body.noop;
+    }
+
     /**
      * Set the puppeteer settings
      */
@@ -137,7 +141,7 @@ app.post('/', (req, res) => {
 
 
 /**
- * Downloader
+ * Video Downloader
  */
 app.post('/vd', (req, res) => {   
 
@@ -245,8 +249,6 @@ app.get('/status', (req, res) => {
         res.send(data);
     });
 
-    
 });
-
 
 app.listen(PORT, HOST); 

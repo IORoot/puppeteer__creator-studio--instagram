@@ -50,6 +50,8 @@ var creator_studio = (function () {
 
     let screenshots = false;
 
+    let noop = false;
+
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -219,6 +221,19 @@ var creator_studio = (function () {
 
     function publicSetScreenshots(trueOrFalse){
         screenshots = trueOrFalse;
+    }
+
+    
+
+
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                                                          │
+    // │                  Turn NOOP on or off                     │
+    // │                                                          │
+    // └──────────────────────────────────────────────────────────┘
+
+    function publicSetNOOP(trueOrFalse){
+        noop = trueOrFalse;
     }
 
 
@@ -582,7 +597,7 @@ var creator_studio = (function () {
                 console.log('Selecting File');
                 await page.waitForSelector('.uiContextualLayerPositioner input[type="file"]');
                 const inputUploadHandle = await page.$('.uiContextualLayerPositioner input[type="file"]'); 
-                inputUploadHandle.uploadFile(IG_post.video);
+                await inputUploadHandle.uploadFile(IG_post.video);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/150_upload_video.png'}) } 
             } catch (err) {
                 console.log('Error using the filebrowser and accepting input file : ' + err);
@@ -822,20 +837,40 @@ var creator_studio = (function () {
             }
 
 
+
+
+
             /**
-             * PUBLISH 
+             * PUBLISH if not a NOOP
              */
-            try {
-                console.log('Click Publish');
-                await page.waitForTimeout(1000);
-                await page.click(selector.publish_button, { waitUntil: "networkidle2" });
-                if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish.png'}) } 
-            } catch (err) {
-                console.log('Error clicking the publish button : ' + err);
-                if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish_error.png'}) } 
-                privateErrorStatus();
-                return;
+            if (false === IG_post.noop){
+                try {
+                    console.log('Click Publish');
+                    await page.waitForTimeout(1000);
+                    await page.click(selector.publish_button, { waitUntil: "networkidle2" });
+                    if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish.png'}) } 
+                } catch (err) {
+                    console.log('Error clicking the publish button : ' + err);
+                    if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish_error.png'}) } 
+                    privateErrorStatus();
+                    return;
+                }
             }
+
+
+
+
+
+            /**
+             * NOOP
+             */
+            if (true === IG_post.noop){
+                console.log('NOOP');
+                if (screenshots == true){ await page.screenshot({path: './screenshots/300_NOOP.png'}) } 
+            }
+
+
+
 
 
             /**
@@ -885,6 +920,7 @@ var creator_studio = (function () {
         cookies: publicSetCookieFile,
         settings: publicSetPuppeteerSettings,
         screenshots: publicSetScreenshots,
+        noop: publicSetNOOP,
     };
 
 })();

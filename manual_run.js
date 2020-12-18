@@ -16,11 +16,12 @@ cs.creator_studio.settings({
     executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
     args: ['--no-sandbox']
 });
-cs.creator_studio.IG_post.video     = "/Users/andrewpearson/Downloads/output.mp4";
-cs.creator_studio.IG_post.cover     = "/Users/andrewpearson/Downloads/photo.jpg";
+cs.creator_studio.IG_post.video     = "./videos/output.mp4";
+cs.creator_studio.IG_post.cover     = "./images/cover.jpg";
 cs.creator_studio.IG_post.date      = "11/11/2020";
 cs.creator_studio.IG_post.time      = "12:30";
 cs.creator_studio.IG_post.caption   = "autopost";
 cs.creator_studio.IG_post.location  = "california";
 cs.creator_studio.IG_post.crosspost = "yes";
+cs.creator_studio.IG_post.noop      = true;
 cs.creator_studio.run();

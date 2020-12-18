@@ -100,5 +100,3 @@ var video_downloader = (function () {
 // │                                                         │
 // └─────────────────────────────────────────────────────────┘
 module.exports = { video_downloader };
-
-// video_downloader.download("https://londonparkour.com/wp-content/uploads/2020/10/output.mp4", "./test_puphpeteer/output.mp4");

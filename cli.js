@@ -29,6 +29,8 @@ const options = yargs
 
     .option("s", { alias: "screenshots", describe: "Screenshot every step", type: "bool" })
 
+    .option("n", { alias: "noop", describe: "NO OPeration. Used to test script works", type: "bool" })
+
     .argv; 
 
 
@@ -86,8 +88,11 @@ if (options.crosspost){
 
 if (options.screenshots){
     cs.creator_studio.IG_post.screenshots(true);
-}   
+}
 
+if (options.noop){
+    cs.creator_studio.IG_post.noop     = `${options.noop}`;
+}
 
 
 // Run, you fools!
