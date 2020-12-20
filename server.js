@@ -113,7 +113,8 @@ app.post('/', (req, res) => {
     }
 
     if (req.body.noop){
-        cs.creator_studio.noop(req.body.noop);
+        console.log('server.js NOOP switched ON.')
+        cs.creator_studio.noop();
     }
 
     /**
@@ -144,8 +145,6 @@ app.post('/', (req, res) => {
  * Video Downloader
  */
 app.post('/vd', (req, res) => {  
-    
-    console.log(req);
 
     if (req.query.apikey != au[0].apikey){
         res.send('Please supply a correct apikey query parameter');
@@ -175,8 +174,6 @@ app.post('/vd', (req, res) => {
  * Clear cookies
  */
 app.post('/clearcookies', (req, res) => {   
-    
-    console.log(req);
 
     /**
      * Check that the APIKEY is set and equal
@@ -213,8 +210,6 @@ app.post('/clearcookies', (req, res) => {
  * Clear Logfile
  */
 app.get('/clearlog', (req, res) => {   
-    
-    console.log(req);
 
     /**
      * Check that the APIKEY is set and equal
@@ -236,8 +231,6 @@ app.get('/clearlog', (req, res) => {
  * Get Status
  */
 app.get('/status', (req, res) => {   
-    
-    console.log(req);
 
     /**
      * Check that the APIKEY is set and equal
