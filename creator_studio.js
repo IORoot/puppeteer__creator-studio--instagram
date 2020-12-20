@@ -288,7 +288,7 @@ var creator_studio = (function () {
             try {
             console.log('create page');
                 page = await browser.newPage();
-                await page.setDefaultNavigationTimeout(100000);
+                await page.setDefaultNavigationTimeout(30000);
                 await page.setViewport({ width: 1200, height: 800 });
             } catch (err) {
                 console.log('Error creating page : ' + err);
@@ -322,7 +322,7 @@ var creator_studio = (function () {
             /**
              * No cookies, Login instead
              */
-            if (!Object.keys(cookiefile).length) {
+            if (!Object.keys(cookiefile).length || Object.keys(cookiefile).length < 1) {
 
                 console.log('No cookies found');
 
@@ -616,7 +616,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click Facebook Page checkbox');
                     await page.waitForTimeout(500);
-                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2" });
+                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2", timeout: 10000 });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/160_select_crosspost.png'}) } 
                 } catch (err) {
                     console.log('Error clicking the facebook crosspost checkbox : ' + err);

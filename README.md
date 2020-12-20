@@ -363,6 +363,7 @@ Requires the following PARAMETERS:
 This will get the last known status of the script. It will be one of the following states:
 
 - success
+- running
 - error
 
 Use this for alerting or metrics.

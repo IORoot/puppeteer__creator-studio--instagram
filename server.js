@@ -109,11 +109,11 @@ app.post('/', (req, res) => {
     }
 
     if (req.body.screenshots){
-        cs.creator_studio.screenshots(true);
+        cs.creator_studio.screenshots(req.body.screenshots);
     }
 
     if (req.body.noop){
-        cs.creator_studio.IG_post.noop = req.body.noop;
+        cs.creator_studio.noop(req.body.noop);
     }
 
     /**
