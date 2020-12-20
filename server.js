@@ -18,17 +18,6 @@ const HOST = '0.0.0.0';
 const app = express();
 
 
-// logging to file and stdout
-var log_file = fs.createWriteStream(__dirname + '/logs/last_request', {flags : 'w'});
-var log_stdout = process.stdout;
-
-console.log = function(d) { //
-    log_file.write(Date() + ' ' + util.format(d) + '\n');
-    log_stdout.write(Date() + ' ' + util.format(d) + '\n');
-};
-
-
-
 /**
  * Open folders
  */
