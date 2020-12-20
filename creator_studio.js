@@ -418,7 +418,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Clicking login Button');
-                    await page.click(selector.login_button, { waitUntil: "networkidle2" });
+                    await page.click(selector.login_button, { waitUntil: "networkidle2", timeout: 10000 });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/050_click_login_button.png'}) }
                 } catch (err) {
                     console.log('Error Clicking on Login button : ' + err);
@@ -620,7 +620,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click Facebook Page checkbox');
                     await page.waitForTimeout(500);
-                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2", timeout: 10000 });
+                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2" });
                     if (screenshots == true){ await page.screenshot({path: './screenshots/160_select_crosspost.png'}) } 
                 } catch (err) {
                     console.log('Error clicking the facebook crosspost checkbox : ' + err);
@@ -847,7 +847,7 @@ var creator_studio = (function () {
             console.log('NOOP = ' + noop);
 
 
-            
+
 
             /**
              * PUBLISH if not a NOOP
