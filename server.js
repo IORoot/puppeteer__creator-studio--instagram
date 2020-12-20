@@ -4,6 +4,7 @@ const express = require('express');
 const serveIndex = require('serve-index')
 const body_parser = require('body-parser');
 const fs = require('fs');
+const util = require('util');
 
 // Import the creator_studio module.
 const cs = require ('./creator_studio.js');
@@ -33,8 +34,6 @@ app.use(body_parser.json());
  * Main route - run puppeteer
  */
 app.post('/', (req, res) => {   
-
-    console.log(req);
 
     /**
      * Check that the APIKEY is set and equal

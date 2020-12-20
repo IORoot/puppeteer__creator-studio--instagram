@@ -852,7 +852,7 @@ var creator_studio = (function () {
             /**
              * PUBLISH if not a NOOP
              */
-            if (false == noop){
+            if (false === noop){
                 try {
                     console.log('Click Publish');
                     await page.waitForTimeout(1000);
@@ -864,19 +864,22 @@ var creator_studio = (function () {
                     privateErrorStatus();
                     return;
                 }
-            }
+            } else {
 
-
-
-
-
-            /**
-             * NOOP
-             */
-            if (true == noop){
+                /**
+                 * NOOP
+                 */
+                
                 console.log('NOOP');
                 if (screenshots == true){ await page.screenshot({path: './screenshots/300_NOOP.png'}) } 
             }
+
+
+
+
+
+            
+            
 
 
 
