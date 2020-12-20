@@ -843,7 +843,7 @@ var creator_studio = (function () {
             /**
              * PUBLISH if not a NOOP
              */
-            if (false === IG_post.noop){
+            if (true === IG_post.noop){
                 try {
                     console.log('Click Publish');
                     await page.waitForTimeout(1000);
