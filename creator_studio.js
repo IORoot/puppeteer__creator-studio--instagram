@@ -220,6 +220,7 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
 
     function publicSetScreenshots(trueOrFalse){
+        console.log('Screenshot set to:' + trueOrFalse);
         screenshots = trueOrFalse;
     }
 
@@ -233,6 +234,7 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
 
     function publicSetNOOP(trueOrFalse){
+        console.log('NOOP set to:' + trueOrFalse);
         noop = trueOrFalse;
     }
 
@@ -278,6 +280,8 @@ var creator_studio = (function () {
                 privateErrorStatus();
                 return;
             } 
+
+
 
 
 
@@ -840,10 +844,15 @@ var creator_studio = (function () {
 
 
 
+            console.log('NOOP = ' + noop);
+
+
+            
+
             /**
              * PUBLISH if not a NOOP
              */
-            if (false === noop){
+            if (false == noop){
                 try {
                     console.log('Click Publish');
                     await page.waitForTimeout(1000);
@@ -864,7 +873,7 @@ var creator_studio = (function () {
             /**
              * NOOP
              */
-            if (true === noop){
+            if (true == noop){
                 console.log('NOOP');
                 if (screenshots == true){ await page.screenshot({path: './screenshots/300_NOOP.png'}) } 
             }
