@@ -18,6 +18,17 @@ const HOST = '0.0.0.0';
 const app = express();
 
 
+// logging to file and stdout
+var log_file = fs.createWriteStream(__dirname + '/logs/last_request', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+    log_file.write(Date() + ' ' + util.format(d) + '\n');
+    log_stdout.write(Date() + ' ' + util.format(d) + '\n');
+};
+
+
+
 /**
  * Open folders
  */
@@ -34,6 +45,7 @@ app.use(body_parser.json());
  */
 app.post('/', (req, res) => {   
 
+    console.log(req);
 
     /**
      * Check that the APIKEY is set and equal
@@ -143,7 +155,9 @@ app.post('/', (req, res) => {
 /**
  * Video Downloader
  */
-app.post('/vd', (req, res) => {   
+app.post('/vd', (req, res) => {  
+    
+    console.log(req);
 
     if (req.query.apikey != au[0].apikey){
         res.send('Please supply a correct apikey query parameter');
@@ -174,6 +188,8 @@ app.post('/vd', (req, res) => {
  */
 app.post('/clearcookies', (req, res) => {   
     
+    console.log(req);
+
     /**
      * Check that the APIKEY is set and equal
      * to the configured one in auth.json file.
@@ -210,6 +226,8 @@ app.post('/clearcookies', (req, res) => {
  */
 app.get('/clearlog', (req, res) => {   
     
+    console.log(req);
+
     /**
      * Check that the APIKEY is set and equal
      * to the configured one in auth.json file.
@@ -231,6 +249,8 @@ app.get('/clearlog', (req, res) => {
  */
 app.get('/status', (req, res) => {   
     
+    console.log(req);
+
     /**
      * Check that the APIKEY is set and equal
      * to the configured one in auth.json file.
