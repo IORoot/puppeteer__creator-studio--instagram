@@ -126,8 +126,7 @@ app.post('/', (req, res) => {
         cs.creator_studio.settings({ 
             headless: true, 
             devtools: false,    
-            executablePath: "/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/Chromium.app/Contents/MacOS/Chromium",
-            // executablePath: "/usr/bin/google-chrome-stable",
+            executablePath: "/usr/bin/google-chrome-stable",
             args: ['--no-sandbox']
         });
     }    
