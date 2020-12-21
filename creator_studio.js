@@ -194,7 +194,15 @@ var creator_studio = (function () {
     // └──────────────────────────────────────────────────────────┘
     function publicSetCookieFile(cookieFile){
         cookieFilename = cookieFile;
-        cookiefile = require(cookieFilename);
+
+        try {
+            const jsonString = fs.readFileSync(cookieFilename)
+            cookiefile = JSON.parse(jsonString)
+        } catch(err) {
+            console.log(err)
+            return
+        }
+
     }
 
 
