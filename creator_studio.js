@@ -890,6 +890,8 @@ var creator_studio = (function () {
                  */
                 console.log('TRUE NOOP = ' + noop);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/300_NOOP.png'}) } 
+                // switch it back off again.
+                noop = false;
             }
 
 
