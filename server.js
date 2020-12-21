@@ -205,6 +205,33 @@ app.post('/clearcookies', (req, res) => {
 });
 
 
+/**
+ * Clear Screenshots
+ */
+app.get('/clearscreenshots', (req, res) => {   
+
+    /**
+     * Check that the APIKEY is set and equal
+     * to the configured one in auth.json file.
+     */
+    if (req.query.apikey != au[0].apikey){
+        res.send('Please supply a correct apikey query parameter');
+        return;
+    }
+
+    /**
+     * Match regex and delete.
+     */
+    const path = __dirname + '/screenshots/'
+    let regex = /[.]png$/
+    fs.readdirSync(path)
+        .filter(f => regex.test(f))
+        .map(f => fs.unlinkSync(path + f))
+
+    res.send('Screenshots Cleared');
+});
+
+
 
 /**
  * Clear Logfile

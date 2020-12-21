@@ -310,7 +310,7 @@ var creator_studio = (function () {
             console.log('cookiefile:' + cookiefile);
             console.log('cookiefile length:' + Object.keys(cookiefile).length);
             console.log('cookiefilename:' + cookieFilename);
-            
+
             if (Object.keys(cookiefile).length) {
 
                 /**
@@ -328,11 +328,10 @@ var creator_studio = (function () {
 
 
 
-
             /**
              * No cookies, Login instead
              */
-            if (!Object.keys(cookiefile).length || Object.keys(cookiefile).length < 1) {
+            if (!Object.keys(cookiefile).length) {
 
                 console.log('No cookies found');
 
@@ -357,7 +356,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Clicking of accept cookies popup');
-                    await page.click(selector.cookie_banner, { waitUntil: "networkidle2" });
+                    await page.click(selector.cookie_banner);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/020_click_cookie_banner.png'}) }
                 } catch (err) {
                     console.log('Error Clicking on cookie banner : ' + err);
@@ -424,7 +423,7 @@ var creator_studio = (function () {
                  */
                 try {
                     console.log('Clicking login Button');
-                    await page.click(selector.login_button, { waitUntil: "networkidle2", timeout: 10000 });
+                    await page.click(selector.login_button);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/050_click_login_button.png'}) }
                 } catch (err) {
                     console.log('Error Clicking on Login button : ' + err);
@@ -440,7 +439,9 @@ var creator_studio = (function () {
              */
             try {
                 await page.waitForTimeout(4000);
-                page.goto(pages.IG_creator_studio, { waitUntil: "networkidle2" });
+                console.log('Visiting Creator Studio');
+                page.goto(pages.IG_creator_studio, {waitUntil: 'domcontentloaded'});
+                await page.waitForTimeout(4000);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/060_visit_creator_studio.png'}) }
             } catch (err) {
                 console.log('Error visiting Creator Studio : ' + err);
@@ -450,13 +451,12 @@ var creator_studio = (function () {
             
 
 
-
-
             /**
              * Save Cookies
              */
             try {
                 await page.waitForTimeout(4000);
+                console.log('Retrieving New Cookies');
                 new_cookies = await page.cookies();
                 if (screenshots == true){ await page.screenshot({path: './screenshots/070_save_cookies.png'}) }
             } catch (err) {
@@ -475,9 +475,11 @@ var creator_studio = (function () {
              * complete. This canbe a simple error catcher console.log
              */
             try {
+                console.log('Saving Cookies to file: ' + cookieFilename);
                 await fs.writeFile(cookieFilename, JSON.stringify(new_cookies, null, 2), (err, data) => {
-                    if (err) throw err;
-                        console.log('ERROR writing cookiefile to cookieFilename' + data);
+                        if (err != null){
+                            console.log('ERROR writing new_cookies to cookieFilename: ' + err);
+                        }
                     }
                 );
                 if (screenshots == true){ await page.screenshot({path: './screenshots/080_write_cookies_to_file.png'}) } 
@@ -495,7 +497,7 @@ var creator_studio = (function () {
             try {
                 console.log('click "new post" button');
                 await page.waitForSelector(selector.new_post_button);
-                await page.click(selector.new_post_button, { waitUntil: "networkidle2" });
+                await page.click(selector.new_post_button);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/090_click_new_post_button.png'}) } 
             } catch (err) {
                 console.log('Error clicking the "new post" button : ' + err);
@@ -514,7 +516,7 @@ var creator_studio = (function () {
             try {
                 console.log('Selecting Instagram Feed link');
                 await page.waitForSelector(selector.instagram_feed_link);
-                await page.click(selector.instagram_feed_link, { waitUntil: "networkidle2" });
+                await page.click(selector.instagram_feed_link);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/100_click_ig_feed.png'}) } 
             } catch (err) {
                 console.log('Error clicking the instagram feed link : ' + err);
@@ -586,7 +588,7 @@ var creator_studio = (function () {
              */
             try {
                 console.log('Clicking on the "+Add Content" link');
-                await page.click(selector.link_add_content, { waitUntil: "networkidle2" });
+                await page.click(selector.link_add_content);
                 await page.waitForTimeout(1000);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/140_click_add_content.png'}) } 
             } catch (err) {
@@ -626,7 +628,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click Facebook Page checkbox');
                     await page.waitForTimeout(500);
-                    await page.click(selector.crosspost_checkbox, { waitUntil: "networkidle2" });
+                    await page.click(selector.crosspost_checkbox);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/160_select_crosspost.png'}) } 
                 } catch (err) {
                     console.log('Error clicking the facebook crosspost checkbox : ' + err);
@@ -651,7 +653,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click crosspost down-arrow');
                     await page.waitForTimeout(500);
-                    await page.click(selector.crosspost_chooser, { waitUntil: "networkidle2" });
+                    await page.click(selector.crosspost_chooser);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/170_select_crosspost_publish_options.png'}) } 
                 } catch (err) {
                     console.log('Error clicking crosspost options down-arrow : ' + err);
@@ -667,7 +669,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click crosspost schedule checkbox');
                     await page.waitForTimeout(1000);
-                    await page.click(selector.crosspost_schedule, { waitUntil: "networkidle2" });
+                    await page.click(selector.crosspost_schedule);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/180_click_checkbox_crosspost_schedule.png'}) } 
                 } catch (err) {
                     console.log('Error clicking crosspost schedule checkbox : ' + err);
@@ -685,7 +687,7 @@ var creator_studio = (function () {
                     await page.keyboard.press('Tab', {delay: 100});
                     await page.keyboard.press('Tab', {delay: 100});
                     await page.keyboard.press('Tab', {delay: 100});
-                    await page.keyboard.type( IG_post.date,  { waitUntil: "networkidle2" } );
+                    await page.keyboard.type( IG_post.date );
                     if (screenshots == true){ await page.screenshot({path: './screenshots/190_crosspost_date.png'}) } 
                 } catch (err) {
                     console.log('Error typing in the crosspost date : ' + err);
@@ -701,7 +703,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Add time');
                     await page.keyboard.press('Tab', {delay: 100});
-                    await page.keyboard.type( IG_post.time, { waitUntil: "networkidle2" } );
+                    await page.keyboard.type( IG_post.time );
                     if (screenshots == true){ await page.screenshot({path: './screenshots/200_crosspost_time.png'}) } 
                 } catch (err) {
                     console.log('Error typing in the crosspost time : ' + err);
@@ -803,7 +805,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click schedule checkbox');
                     await page.waitForTimeout(500);
-                    await page.click(selector.schedule_checkbox, { waitUntil: "networkidle2" });
+                    await page.click(selector.schedule_checkbox);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/250_click_schedule.png'}) } 
                 } catch (err) {
                     console.log('Error clicking the schedule checkbox : ' + err);
@@ -820,7 +822,7 @@ var creator_studio = (function () {
                     await page.keyboard.press('Tab', {delay: 100});
                     await page.keyboard.press('Tab', {delay: 100});
                     await page.keyboard.press('Tab', {delay: 100});
-                    await page.keyboard.type( IG_post.date,  { waitUntil: "networkidle2" } );
+                    await page.keyboard.type( IG_post.date );
                     if (screenshots == true){ await page.screenshot({path: './screenshots/260_schedule_date.png'}) } 
                 } catch (err) {
                     console.log('Error typing in the date : ' + err);
@@ -837,7 +839,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Add time');
                     await page.keyboard.press('Tab', {delay: 100});
-                    await page.keyboard.type( IG_post.time, { waitUntil: "networkidle2" } );
+                    await page.keyboard.type( IG_post.time );
                     if (screenshots == true){ await page.screenshot({path: './screenshots/270_schedule_time.png'}) } 
                 } catch (err) {
                     console.log('Error typing in the time : ' + err);
@@ -865,7 +867,7 @@ var creator_studio = (function () {
                 try {
                     console.log('Click Publish');
                     await page.waitForTimeout(1000);
-                    await page.click(selector.publish_button, { waitUntil: "networkidle2" });
+                    await page.click(selector.publish_button);
                     if (screenshots == true){ await page.screenshot({path: './screenshots/280_publish.png'}) } 
                 } catch (err) {
                     console.log('Error clicking the publish button : ' + err);
