@@ -302,9 +302,15 @@ var creator_studio = (function () {
 
 
 
+
+
             /**
              * Cookie File exists
              */
+            console.log('cookiefile:' + cookiefile);
+            console.log('cookiefile length:' + Object.keys(cookiefile).length);
+            console.log('cookiefilename:' + cookieFilename);
+            
             if (Object.keys(cookiefile).length) {
 
                 /**
@@ -471,7 +477,7 @@ var creator_studio = (function () {
             try {
                 await fs.writeFile(cookieFilename, JSON.stringify(new_cookies, null, 2), (err, data) => {
                     if (err) throw err;
-                        console.log(data);
+                        console.log('ERROR writing cookiefile to cookieFilename' + data);
                     }
                 );
                 if (screenshots == true){ await page.screenshot({path: './screenshots/080_write_cookies_to_file.png'}) } 
@@ -506,12 +512,12 @@ var creator_studio = (function () {
              * Select the "instagram feed" button
              */
             try {
-                console.log('Selecting "Instagram Feed" link');
+                console.log('Selecting Instagram Feed link');
                 await page.waitForSelector(selector.instagram_feed_link);
                 await page.click(selector.instagram_feed_link, { waitUntil: "networkidle2" });
                 if (screenshots == true){ await page.screenshot({path: './screenshots/100_click_ig_feed.png'}) } 
             } catch (err) {
-                console.log('Error clicking the "instagram feed" link : ' + err);
+                console.log('Error clicking the instagram feed link : ' + err);
                 if (screenshots == true){ await page.screenshot({path: './screenshots/101_click_ig_feed_error.png'}) } 
                 privateErrorStatus();
                 return;

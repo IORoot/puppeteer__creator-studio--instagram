@@ -1,26 +1,11 @@
-Fri Dec 18 2020 17:37:17 GMT+0000 (Greenwich Mean Time) Launch Puppeteer
-Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) create browser
-Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) create page
-Fri Dec 18 2020 17:37:18 GMT+0000 (Greenwich Mean Time) load cookies
-Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) click "new post" button
-Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) undefined
-Fri Dec 18 2020 17:37:26 GMT+0000 (Greenwich Mean Time) Selecting "Instagram Feed" link
-Fri Dec 18 2020 17:37:27 GMT+0000 (Greenwich Mean Time) Wait for side tray
-Fri Dec 18 2020 17:37:28 GMT+0000 (Greenwich Mean Time) Entering a Caption
-Fri Dec 18 2020 17:37:29 GMT+0000 (Greenwich Mean Time) Entering a Location
-Fri Dec 18 2020 17:37:29 GMT+0000 (Greenwich Mean Time) Clicking on the "+Add Content" link
-Fri Dec 18 2020 17:37:30 GMT+0000 (Greenwich Mean Time) Selecting File
-Fri Dec 18 2020 17:37:30 GMT+0000 (Greenwich Mean Time) Click Facebook Page checkbox
-Fri Dec 18 2020 17:37:31 GMT+0000 (Greenwich Mean Time) Click crosspost down-arrow
-Fri Dec 18 2020 17:37:32 GMT+0000 (Greenwich Mean Time) Click crosspost schedule checkbox
-Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Add crosspost date
-Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Add time
-Fri Dec 18 2020 17:37:33 GMT+0000 (Greenwich Mean Time) Selecting Cover Image
-Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click custom upload box
-Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click "add image"
-Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click down-arrow
-Fri Dec 18 2020 17:37:34 GMT+0000 (Greenwich Mean Time) Click schedule checkbox
-Fri Dec 18 2020 17:37:35 GMT+0000 (Greenwich Mean Time) Add date
-Fri Dec 18 2020 17:37:35 GMT+0000 (Greenwich Mean Time) Add time
-Fri Dec 18 2020 17:37:36 GMT+0000 (Greenwich Mean Time) NOOP
-Fri Dec 18 2020 17:37:36 GMT+0000 (Greenwich Mean Time) Done
+Mon Dec 21 2020 07:34:16 GMT+0000 (Greenwich Mean Time) Screenshot set to:on
+Mon Dec 21 2020 07:34:16 GMT+0000 (Greenwich Mean Time) Launch Puppeteer
+Mon Dec 21 2020 07:34:17 GMT+0000 (Greenwich Mean Time) create browser
+Mon Dec 21 2020 07:34:17 GMT+0000 (Greenwich Mean Time) create page
+Mon Dec 21 2020 07:34:18 GMT+0000 (Greenwich Mean Time) cookiefile:[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Mon Dec 21 2020 07:34:18 GMT+0000 (Greenwich Mean Time) cookiefile length:6
+Mon Dec 21 2020 07:34:18 GMT+0000 (Greenwich Mean Time) cookiefilename:/Users/andrewpearson/Storage/Code/_Small_Experiments/test_puphpeteer/cookies/cookies.json
+Mon Dec 21 2020 07:34:18 GMT+0000 (Greenwich Mean Time) load cookies
+Mon Dec 21 2020 07:34:26 GMT+0000 (Greenwich Mean Time) click "new post" button
+Mon Dec 21 2020 07:34:26 GMT+0000 (Greenwich Mean Time) undefined
+Mon Dec 21 2020 07:34:56 GMT+0000 (Greenwich Mean Time) Error clicking the "new post" button : TimeoutError: waiting for selector `#mediaManagerLeftNavigation [role="button"]` failed: timeout 30000ms exceeded
