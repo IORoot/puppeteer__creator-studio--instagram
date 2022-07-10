@@ -229,16 +229,9 @@ Options:
 
 
 
-
-
 ## `video_download.js`
 
 This has one public method, `download()` which takes two parameters, `url` and `filePath`. The `cli_vd.js` script should be used to run this method.
-
-
-
-
-
 
 
 ## `server.js`
@@ -261,7 +254,7 @@ This contains the video files downloaded with the `video_download.js` script. Us
 
 This contains the coverart files downloaded with the `video_download.js` script. Use to make sure the image file has downloaded.
 
-#### `screenshots`
+#### `/screenshots`
 
 Contains the last round of screenshots taken by the script if the `screenshot` parameter has been switched on.
 
@@ -375,4 +368,4 @@ Requires the following PARAMETERS:
 
 ## Docker
 
-This script is also dockerised and contains the dockerfile I use to setup my installation on DigitalOcean.z
+This script is also dockerised and contains the dockerfile I use to setup my installation on DigitalOcean.

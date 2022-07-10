@@ -273,7 +273,6 @@ app.get('/status', (req, res) => {
             res.send(err);
             return;
         }
-
         res.send(data);
     });
 
